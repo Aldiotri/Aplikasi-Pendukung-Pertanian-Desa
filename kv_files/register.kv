@@ -1,0 +1,32 @@
+#:kivy 2.0.0
+<RegisterScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: [20, 50, 20, 20]
+        spacing: 20
+        canvas.before:
+            Color:
+                rgba: (0.96, 0.96, 0.96, 1)
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Label:
+            text: 'Daftar'
+            font_size: 32
+            color: (0.2, 0.6, 0.86, 1)
+            bold: True
+
+        TextInput:
+            hint_text: 'Username'
+        TextInput:
+            hint_text: 'Email'
+        TextInput:
+            hint_text: 'Password'
+            password: True
+        Button:
+            text: 'Daftar'
+            on_press: root.register()
+        Button:
+            text: 'Kembali ke Login'
+            on_press: root.go_back_to_login()
