@@ -1,0 +1,51 @@
+#:kivy 2.0.0
+<HomeScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        
+        # Bagian header
+        BoxLayout:
+            size_hint_y: None
+            height: "70dp"
+            padding: "10dp"
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 0, 1  # Warna kuning
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            Label:
+                text: "Selamat Datang"
+                color: 0, 0, 0, 1
+                font_size: "20sp"
+        
+        # Konten utama
+        Label:
+            text: "Ini adalah halaman Home"
+        
+        # Navigasi bawah
+        BoxLayout:
+            size_hint_y: None
+            height: "60dp"
+            padding: "10dp"
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 0, 1  # Warna kuning
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            Button:
+                text: "Home"
+                on_press: app.root.current = "home"
+            Button:
+                text: "Search"
+                on_press: app.root.current = "search"
+            Button:
+                text: "Notifikasi"
+                on_press: app.root.current = "notification"
+            Button:
+                text: "Cart"
+                on_press: app.root.current = "cart"
+            Button:
+                text: "Profile"
+                on_press: app.root.current = "profile"

@@ -1,0 +1,82 @@
+#:kivy 2.0.0
+<ProfileScreen>:
+    BoxLayout:
+        orientation: "vertical"
+
+        # Header
+        BoxLayout:
+            size_hint_y: None
+            height: "70dp"
+            padding: "10dp"
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 0, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            Label:
+                text: "Profil"
+                font_size: "20sp"
+                color: 0, 0, 0, 1
+            Button:
+                size_hint: None, None
+                size: "30dp", "30dp"
+                background_normal: "assets/images/edit_icon.png"
+
+        # Profile picture and phone number
+        BoxLayout:
+            orientation: "vertical"
+            size_hint_y: None
+            height: "200dp"
+            padding: "20dp"
+            spacing: "10dp"
+            Image:
+                source: "assets/images/profile_placeholder.png"
+                size_hint: None, None
+                size: "100dp", "100dp"
+                pos_hint: {"center_x": 0.5}
+            Label:
+                text: "+62"
+                size_hint_y: None
+                height: "40dp"
+                font_size: "16sp"
+                color: 0.5, 0.5, 0.5, 1
+                pos_hint: {"center_x": 0.5}
+
+        # Menu Buttons
+        BoxLayout:
+            orientation: "vertical"
+            padding: "10dp"
+            spacing: "10dp"
+            Button:
+                text: "Pesan saya"
+            Button:
+                text: "Mulai jual"
+            Button:
+                text: "Tentang kami"
+            Button:
+                text: "Logout"
+        
+        # Bottom Navigation Bar
+        BoxLayout:
+            size_hint_y: None
+            height: "60dp"
+            padding: "10dp"
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 0, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            Button:
+                text: "Home"
+                on_press: app.root.current = "home"
+            Button:
+                text: "Search"
+                on_press: app.root.current = "search"
+            Button:
+                text: "Cart"
+                on_press: app.root.current = "cart"
+            Button:
+                text: "Profile"
+                on_press: app.root.current = "profile"

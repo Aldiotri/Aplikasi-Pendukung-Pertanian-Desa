@@ -1,0 +1,45 @@
+#:kivy 2.0.0
+<NotificationScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: [20, 20, 20, 20]
+        spacing: 20
+        canvas.before:
+            Color:
+                rgba: (0.96, 0.96, 0.96, 1)
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Label:
+            text: 'Notifikasi'
+            font_size: 28
+            color: (0.2, 0.6, 0.86, 1)
+            bold: True
+
+        Label:
+            text: 'Pesanan dan promo terbaru akan muncul disini...'
+            font_size: 16
+            color: (0.4, 0.4, 0.4, 1)
+
+        GridLayout:
+            cols: 5
+            size_hint_y: None
+            height: 60
+            spacing: 10
+            padding: [10, 10, 10, 10]
+            Button:
+                text: 'Home'
+                on_press: root.go_to_home()
+            Button:
+                text: 'Cari Produk'
+                on_press: root.go_to_search()
+            Button:
+                text: 'Keranjang'
+                on_press: root.go_to_cart()
+            Button:
+                text: 'Notifikasi'
+            
+            Button:
+                text: 'Profil'
+                on_press: root.go_to_profile()
