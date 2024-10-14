@@ -1,7 +1,43 @@
 #:kivy 2.0.0
 <SearchScreen>:
     BoxLayout:
-        orientation: "vertical"
-        
+        orientation: 'vertical'
+        padding: [20, 20, 20, 20]
+        spacing: 20
+        canvas.before:
+            Color:
+                rgba: (0.96, 0.96, 0.96, 1)
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
         Label:
-            text: "Ini adalah halaman Pencarian"
+            text: 'Pencarian Produk'
+            font_size: 28
+            color: (0.2, 0.6, 0.86, 1)
+            bold: True
+
+        TextInput:
+            hint_text: 'Masukkan produk'
+
+        GridLayout:
+            cols: 5
+            size_hint_y: None
+            height: 60
+            spacing: 10
+            padding: [10, 10, 10, 10]
+            Button:
+                text: 'Home'
+                on_press: root.go_to_home()
+            Button:
+                text: 'Cari Produk'
+                
+            Button:
+                text: 'Keranjang'
+                on_press: root.go_to_cart()
+            Button:
+                text: 'Notifikasi'
+                on_press: root.go_to_notification()
+            Button:
+                text: 'Profil'
+                on_press: root.go_to_profile()
