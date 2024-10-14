@@ -3,6 +3,7 @@ from kivy.uix.screenmanager import ScreenManager
 from kivy.lang import Builder
 
 # Import screen classes
+from screens.LoginScreen import LoginScreen
 from screens.HomeScreen import HomeScreen
 from screens.ProfileScreen import ProfileScreen
 from screens.SearchScreen import SearchScreen
@@ -15,6 +16,7 @@ class MainApp(App):
         sm = ScreenManager()
         
         # Tambahkan screen ke ScreenManager
+        sm.add_widget(LoginScreen(name='login'))
         sm.add_widget(HomeScreen(name='home'))
         sm.add_widget(ProfileScreen(name='profile'))
         sm.add_widget(SearchScreen(name='search'))
