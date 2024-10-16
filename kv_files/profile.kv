@@ -10,7 +10,7 @@
             padding: "10dp"
             canvas.before:
                 Color:
-                    rgba: 1, 1, 0, 1
+                    rgba: 1, 0.8, 0.2, 1
                 Rectangle:
                     size: self.size
                     pos: self.pos
@@ -48,6 +48,9 @@
             orientation: "vertical"
             padding: "10dp"
             spacing: "10dp"
+            canvas.before:
+                Color:
+                    rgba: (1, 0.8, 0.2, 1)  # Warna kuning
             Button:
                 text: "Pesan saya"
             Button:
@@ -57,29 +60,39 @@
             Button:
                 text: "Logout"
         
-        # Bottom Navigation Bar
+        # Bottom NavBar
         BoxLayout:
             size_hint_y: None
             height: "60dp"
-            padding: "10dp"
+            padding: [5, 10]  # Menghilangkan padding agar tombol memenuhi lebar layar
+            spacing: 0  # Menghilangkan jarak antar tombol
             canvas.before:
                 Color:
-                    rgba: 1, 1, 0, 1
+                    rgba: (1, 0.8, 0.2, 1)  # Warna kuning
                 Rectangle:
-                    size: self.size
                     pos: self.pos
-            Button:
-                text: "Home"
-                on_press: app.root.current = "home"
-            Button:
-                text: "Search"
-                on_press: app.root.current = "search"
-            Button:
-                text: "Notifikasi"
-                on_press: app.root.current = "notification"
-            Button:
-                text: "Cart"
-                on_press: app.root.current = "cart"
-            Button:
-                text: "Profile"
-                on_press: app.root.current = "profile"
+                    size: self.size
+            
+            ImageButton:
+                source: 'assets/home.png'  # Ikon Home
+                on_press: root.go_to_home()
+                size_hint_x: 1 
+
+            ImageButton:
+                source: 'assets/search.png'  # Ikon Search
+                on_press: root.go_to_search()
+                size_hint_x: 1 
+
+            ImageButton:
+                source: 'assets/cart.png'  # Ikon Cart
+                on_press: root.go_to_cart()
+                size_hint_x: 1 
+
+            ImageButton:
+                source: 'assets/notification.png'  # Ikon Notification
+                on_press: root.go_to_notification()
+                size_hint_x: 1 
+
+            ImageButton:
+                source: 'assets/profile.png'  # Ikon Profile
+                size_hint_x: 1 

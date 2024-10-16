@@ -2,7 +2,6 @@
 <SearchScreen>:
     BoxLayout:
         orientation: 'vertical'
-        padding: [20, 20, 20, 20]
         spacing: 20
         canvas.before:
             Color:
@@ -20,24 +19,39 @@
         TextInput:
             hint_text: 'Masukkan produk'
 
-        GridLayout:
-            cols: 5
+         # Bottom NavBar
+        BoxLayout:
             size_hint_y: None
-            height: 60
-            spacing: 10
-            padding: [10, 10, 10, 10]
-            Button:
-                text: 'Home'
+            height: "60dp"
+            padding: [5, 10]  # Menghilangkan padding agar tombol memenuhi lebar layar
+            spacing: 0  # Menghilangkan jarak antar tombol
+            canvas.before:
+                Color:
+                    rgba: (1, 0.8, 0.2, 1)  # Warna kuning
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            
+            ImageButton:
+                source: 'assets/home.png'  # Ikon Home
                 on_press: root.go_to_home()
-            Button:
-                text: 'Cari Produk'
-                
-            Button:
-                text: 'Keranjang'
+                size_hint_x: 1 
+
+            ImageButton:
+                source: 'assets/search.png'  # Ikon Search
+                size_hint_x: 1 
+
+            ImageButton:
+                source: 'assets/cart.png'  # Ikon Cart
                 on_press: root.go_to_cart()
-            Button:
-                text: 'Notifikasi'
+                size_hint_x: 1 
+
+            ImageButton:
+                source: 'assets/notification.png'  # Ikon Notification
                 on_press: root.go_to_notification()
-            Button:
-                text: 'Profil'
+                size_hint_x: 1 
+
+            ImageButton:
+                source: 'assets/profile.png'  # Ikon Profile
                 on_press: root.go_to_profile()
+                size_hint_x: 1 

@@ -1,51 +1,97 @@
 #:kivy 2.0.0
+<Button>:
+    background_color: 1, 0.8, 0.2, 1  # Warna background tombol kuning
+    color: 0, 0, 0, 1  # Warna teks hitam
+
+<ImageButton@ButtonBehavior+Image>:
+    size_hint: None, None
+    allow_stretch: True
+    keep_ratio: True  # Agar gambar tetap proporsional
+    size: 60, 60  # Ukuran gambar (ikon)
+
 <HomeScreen>:
     BoxLayout:
-        orientation: "vertical"
-        
-        # Bagian header
+        orientation: 'vertical'
+    
+        # Header
         BoxLayout:
             size_hint_y: None
-            height: "70dp"
-            padding: "10dp"
+            height: "120dp"
+            padding: [10, 10, 10, 10]
             canvas.before:
                 Color:
-                    rgba: 1, 1, 0, 1  # Warna kuning
+                    rgba: (1, 0.8, 0.2, 1)  # Warna kuning
                 Rectangle:
-                    size: self.size
                     pos: self.pos
+                    size: self.size
+
             Label:
                 text: "Selamat Datang"
-                color: 0, 0, 0, 1
+                color: (0, 0, 0, 1)  # Warna teks hitam
+                font_size: "24sp"
+                bold: True
+
+        # Title
+        BoxLayout:
+            size_hint_y: None
+            height: "50dp"
+            padding: [10, 0]
+            canvas.before:
+            Label:
+                text: "Produk terlaris"
                 font_size: "20sp"
-        
-        # Konten utama
-        Label:
-            text: "Ini adalah halaman Home"
-        
-        # Navigasi bawah
+                color: (1, 1, 1, 1)  # Warna teks putih
+
+        # Produk Grid
+        GridLayout:
+            cols: 2
+            row_default_height: "150dp"
+            row_force_default: True
+            spacing: "10dp"
+            padding: [10, 10]
+
+            Image:
+                source: "assets/logo.png"  # Ganti dengan gambar produk asli
+            Image:
+                source: "produk2.png"  # Ganti dengan gambar produk asli
+            Image:
+                source: "placeholder.png"  # Placeholder produk
+            Image:
+                source: "placeholder.png"
+
+        # Bottom NavBar
         BoxLayout:
             size_hint_y: None
             height: "60dp"
-            padding: "10dp"
+            padding: [5, 10]  # Menghilangkan padding agar tombol memenuhi lebar layar
+            spacing: 0  # Menghilangkan jarak antar tombol
             canvas.before:
                 Color:
-                    rgba: 1, 1, 0, 1  # Warna kuning
+                    rgba: (1, 0.8, 0.2, 1)  # Warna kuning
                 Rectangle:
-                    size: self.size
                     pos: self.pos
-            Button:
-                text: "Home"
-                on_press: app.root.current = "home"
-            Button:
-                text: "Search"
-                on_press: app.root.current = "search"
-            Button:
-                text: "Notifikasi"
-                on_press: app.root.current = "notification"
-            Button:
-                text: "Cart"
-                on_press: app.root.current = "cart"
-            Button:
-                text: "Profile"
-                on_press: app.root.current = "profile"
+                    size: self.size
+            
+            ImageButton:
+                source: 'assets/home.png'  # Ikon Home
+                size_hint_x: 1 
+
+            ImageButton:
+                source: 'assets/search.png'  # Ikon Search
+                on_press: root.go_to_search()
+                size_hint_x: 1 
+
+            ImageButton:
+                source: 'assets/cart.png'  # Ikon Cart
+                on_press: root.go_to_cart()
+                size_hint_x: 1 
+
+            ImageButton:
+                source: 'assets/notification.png'  # Ikon Notification
+                on_press: root.go_to_notification()
+                size_hint_x: 1 
+
+            ImageButton:
+                source: 'assets/profile.png'  # Ikon Profile
+                on_press: root.go_to_profile()
+                size_hint_x: 1 

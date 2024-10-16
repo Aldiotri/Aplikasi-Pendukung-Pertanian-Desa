@@ -2,7 +2,6 @@
 <NotificationScreen>:
     BoxLayout:
         orientation: 'vertical'
-        padding: [20, 20, 20, 20]
         spacing: 20
         canvas.before:
             Color:
@@ -22,24 +21,39 @@
             font_size: 16
             color: (0.4, 0.4, 0.4, 1)
 
-        GridLayout:
-            cols: 5
+        # Bottom NavBar
+        BoxLayout:
             size_hint_y: None
-            height: 60
-            spacing: 10
-            padding: [10, 10, 10, 10]
-            Button:
-                text: 'Home'
-                on_press: root.go_to_home()
-            Button:
-                text: 'Cari Produk'
-                on_press: root.go_to_search()
-            Button:
-                text: 'Keranjang'
-                on_press: root.go_to_cart()
-            Button:
-                text: 'Notifikasi'
+            height: "60dp"
+            padding: [5, 10]  # Menghilangkan padding agar tombol memenuhi lebar layar
+            spacing: 0  # Menghilangkan jarak antar tombol
+            canvas.before:
+                Color:
+                    rgba: (1, 0.8, 0.2, 1)  # Warna kuning
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
             
-            Button:
-                text: 'Profil'
+            ImageButton:
+                source: 'assets/home.png'  # Ikon Home
+                on_press: root.go_to_home()
+                size_hint_x: 1 
+
+            ImageButton:
+                source: 'assets/search.png'  # Ikon Search
+                on_press: root.go_to_search()
+                size_hint_x: 1 
+
+            ImageButton:
+                source: 'assets/cart.png'  # Ikon Cart
+                on_press: root.go_to_cart()
+                size_hint_x: 1 
+
+            ImageButton:
+                source: 'assets/notification.png'  # Ikon Notification
+                size_hint_x: 1 
+
+            ImageButton:
+                source: 'assets/profile.png'  # Ikon Profile
                 on_press: root.go_to_profile()
+                size_hint_x: 1 
