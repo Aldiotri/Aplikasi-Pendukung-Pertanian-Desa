@@ -3,7 +3,7 @@ from kivy.uix.screenmanager import ScreenManager
 from kivy.lang import Builder
 from kivy.core.window import Window
 
-# Misalkan ukuran perangkat mobile 360x640 (ukuran standar untuk perangkat HD)
+# Ukuran perangkat mobile 360x640 (ukuran standar untuk perangkat HD)
 Window.size = (360, 640)
 
 # Import screen classes
@@ -14,6 +14,7 @@ from screens.ProfileScreen import ProfileScreen
 from screens.SearchScreen import SearchScreen
 from screens.NotificationScreen import NotificationScreen
 from screens.CartScreen import CartScreen
+from screens.AboutUsScreen import AboutUsScreen
 
 
 class MainApp(App):
@@ -28,6 +29,7 @@ class MainApp(App):
         sm.add_widget(SearchScreen(name='search'))
         sm.add_widget(NotificationScreen(name='notification'))
         sm.add_widget(CartScreen(name='cart'))
+        sm.add_widget(AboutUsScreen(name='aboutus'))
         
         return sm
 

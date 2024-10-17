@@ -1,0 +1,98 @@
+#:kivy 2.0.0
+<AboutUsScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+
+        # Header
+        BoxLayout:
+            size_hint_y: None
+            height: '120dp'
+            padding: [10, 10, 10, 10]
+            canvas.before:
+                Color:
+                    rgba: (1, 0.8, 0.2, 1)  # Warna kuning
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            Label:
+                text: "Tentang Kami"
+                font_size: "24sp"
+                color: (0, 0, 0, 1)  # Warna teks hitam
+                bold: True
+
+        # Konten Utama
+        ScrollView:
+            BoxLayout:
+                orientation: 'vertical'
+                padding: [10, 10, 10, 10]
+                spacing: 10
+                size_hint_y: None
+                height: self.minimum_height
+
+                Label:
+                    text: "Aplikasi Pendukung Pertanian Desa"
+                    font_size: '22sp'
+                    color: (0, 0, 0, 1)
+                    bold: True
+                    size_hint_y: None
+                    height: '40dp'
+
+                Label:
+                    text: "Kami adalah tim yang berdedikasi untuk menyediakan solusi digital yang membantu meningkatkan pertanian di desa-desa. Aplikasi ini dirancang untuk mempermudah akses informasi bagi para petani dan memberikan kemudahan dalam pengelolaan hasil pertanian."
+                    font_size: '16sp'
+                    color: (0, 0, 0, 1)
+                    size_hint_y: None
+                    height: '100dp'
+                    halign: 'left'
+                    valign: 'middle'
+                    text_size: self.width, None
+
+                Label:
+                    text: "Visi Kami"
+                    font_size: '20sp'
+                    color: (0, 0, 0, 1)
+                    bold: True
+                    size_hint_y: None
+                    height: '40dp'
+
+                Label:
+                    text: "Membawa teknologi modern ke tangan petani desa untuk meningkatkan produktivitas, efisiensi, dan kualitas hidup mereka."
+                    font_size: '16sp'
+                    color: (0, 0, 0, 1)
+                    size_hint_y: None
+                    height: '80dp'
+                    halign: 'left'
+                    valign: 'middle'
+                    text_size: self.width, None
+
+                Label:
+                    text: "Misi Kami"
+                    font_size: '20sp'
+                    color: (0, 0, 0, 1)
+                    bold: True
+                    size_hint_y: None
+                    height: '40dp'
+
+                Label:
+                    text: "1. Mengedukasi para petani dengan informasi yang mudah diakses dan relevan.\n2. Memberikan solusi digital untuk pengelolaan lahan, bibit, dan hasil panen.\n3. Menyediakan platform komunikasi antar petani dan distributor untuk memaksimalkan pemasaran hasil pertanian."
+                    font_size: '16sp'
+                    color: (0, 0, 0, 1)
+                    size_hint_y: None
+                    height: '160dp'
+                    halign: 'left'
+                    valign: 'middle'
+                    text_size: self.width, None
+
+       # Tombol Back
+        BoxLayout:
+            size_hint_y: None
+            height: '60dp'
+            padding: [10, 10]
+            Button:
+                text: 'Back'
+                size_hint_y: None
+                height: '50dp'
+                background_color: (1, 0.8, 0.2, 1)  # Warna kuning untuk tombol back
+                color: (0, 0, 0, 1)
+                on_press: root.manager.current = 'profile'  # Kembali ke halaman profil

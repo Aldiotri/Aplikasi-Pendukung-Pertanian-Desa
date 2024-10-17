@@ -23,25 +23,39 @@
                 size: "30dp", "30dp"
                 background_normal: "assets/images/edit_icon.png"
 
-        # Profile picture and phone number
+        # Profile picture layout
         BoxLayout:
-            orientation: "vertical"
             size_hint_y: None
-            height: "200dp"
-            padding: "20dp"
-            spacing: "10dp"
+            height: '150dp'
+            padding: [20, 20, 20, 20]
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1  # Warna putih
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
             Image:
-                source: "assets/images/profile_placeholder.png"
+                source: 'path_to_profile_picture.png'
                 size_hint: None, None
-                size: "100dp", "100dp"
-                pos_hint: {"center_x": 0.5}
+                size: '100dp', '100dp'
+                allow_stretch: True
+                keep_ratio: False
+
+        # Phone layout
+        BoxLayout:
+            size_hint_y: None
+            height: '50dp'
+            padding: [20, 20, 20, 20]
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1  # Warna putih
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
             Label:
-                text: "+62"
-                size_hint_y: None
-                height: "40dp"
-                font_size: "16sp"
-                color: 0.5, 0.5, 0.5, 1
-                pos_hint: {"center_x": 0.5}
+                text: 'Phone: 123-456-7890'
+                font_size: '18sp'
+                color: (0, 0, 0, 1)  # Warna teks hitam
 
         # Menu Buttons
         BoxLayout:
@@ -50,15 +64,31 @@
             spacing: "10dp"
             canvas.before:
                 Color:
-                    rgba: (1, 0.8, 0.2, 1)  # Warna kuning
+                    rgba: 1, 1, 1, 1  # Warna putih
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+                    
             Button:
+                background_color: 1, 0.8, 0.2, 1
                 text: "Pesan saya"
             Button:
+                background_color: 1, 0.8, 0.2, 1
                 text: "Mulai jual"
+                
+
             Button:
+                background_color: 1, 0.8, 0.2, 1
                 text: "Tentang kami"
+                on_press: root.go_to_aboutus()
+
+            # Tombol Logout
             Button:
-                text: "Logout"
+                text: 'Logout'
+                size_hint_y: None
+                height: '50dp'
+                background_color: (1, 0.3, 0.3, 1)  # Warna tombol merah
+                on_press: root.open_logout_popup()  # Mengakses metode dari root
         
         # Bottom NavBar
         BoxLayout:

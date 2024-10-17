@@ -11,3 +11,4 @@ class LoginScreen(Screen):
 
     def go_to_register(self):
         self.manager.current = 'register'
+       
