@@ -1,0 +1,23 @@
+#:kivy 2.0.0
+<IntroScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 20
+        padding: 40
+
+        Image:
+            source: 'assets/logo.png'
+            size_hint: (1, 0.5)
+
+        Label:
+            text: "Selamat Datang Di\nAplikasi Pendukung Pertanian Desa"
+            font_size: 24
+            halign: 'center'
+            color: 0, 0, 0, 1
+
+        Button:
+            text: "NEXT"
+            size_hint: (1, 0.1)
+            on_press: root.go_to_login()
+
+

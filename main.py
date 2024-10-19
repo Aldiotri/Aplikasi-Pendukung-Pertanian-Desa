@@ -15,6 +15,7 @@ from screens.SearchScreen import SearchScreen
 from screens.NotificationScreen import NotificationScreen
 from screens.CartScreen import CartScreen
 from screens.AboutUsScreen import AboutUsScreen
+from screens.IntroScreen import IntroScreen
 
 
 class MainApp(App):
@@ -22,6 +23,7 @@ class MainApp(App):
         sm = ScreenManager()
         
         # Tambahkan screen ke ScreenManager
+        sm.add_widget(IntroScreen(name='intro'))
         sm.add_widget(LoginScreen(name='login'))
         sm.add_widget(RegisterScreen(name='register'))
         sm.add_widget(HomeScreen(name='home'))

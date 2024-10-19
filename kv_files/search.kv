@@ -2,22 +2,121 @@
 <SearchScreen>:
     BoxLayout:
         orientation: 'vertical'
-        spacing: 20
-        canvas.before:
-            Color:
-                rgba: (0.96, 0.96, 0.96, 1)
-            Rectangle:
-                pos: self.pos
-                size: self.size
+        
+        # Header (Yellow background)
+        BoxLayout:
+            size_hint_y: None
+            height: "100dp"
+            padding: [20, 20]
+            canvas.before:
+                Color:
+                    rgba: 1, 0.8, 0.2, 1  # Yellow color
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
 
-        Label:
-            text: 'Pencarian Produk'
-            font_size: 28
-            color: (0.2, 0.6, 0.86, 1)
-            bold: True
+            Label:
+                text: "Searching"
+                font_size: "24sp"
+                bold: True
+                color: (0, 0, 0, 1)  # Black text
+        
+        # Lokasi Anda (Container untuk lokasi)
+        BoxLayout:
+            orientation: 'vertical'
+            padding: [10, 10]
+            spacing: 10
+            size_hint_y: None
+            height: "120dp"
+            
+            BoxLayout:
+                spacing: 5
+                size_hint_y: None
+                height: "40dp"
+                Image:
+                    source: 'assets/location_icon.png'  # Tambahkan icon lokasi
+                    size_hint_x: None
+                    width: "30dp"
+                Label:
+                    text: "Lokasi anda"
+                    font_size: "18sp"
+                    color: (0, 0, 0, 1)
+            
+            Label:
+                text: "Boyolali, Boyolali, Kabupaten Boyolali, Jawa Tengah"
+                font_size: "14sp"
+                color: (0.3, 0.3, 0.3, 1)
+                size_hint_y: None
+                height: "30dp"
 
-        TextInput:
-            hint_text: 'Masukkan produk'
+        # Lokasi Toko Terdekat (Map)
+        BoxLayout:
+            size_hint_y: None
+            height: "200dp"
+            padding: [10, 10]
+            canvas.before:
+                Color:
+                    rgba: 0.95, 0.95, 0.95, 1  # Grey background for the map
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            # Simulasi peta bisa menggunakan gambar atau widget peta jika tersedia
+            Image:
+                source: 'assets/map_placeholder.png'
+                allow_stretch: True
+
+        # Search Bar
+        BoxLayout:
+            size_hint_y: None
+            height: "60dp"
+            padding: [10, 10]
+            spacing: 10
+
+            TextInput:
+                hint_text: "Search"
+                size_hint_x: 0.9
+                height: "40dp"
+                background_normal: ''
+                background_color: 0.95, 0.95, 0.95, 1  # Light grey background for search
+                color: 0.3, 0.3, 0.3, 1
+                font_size: '16sp'
+                padding: [10, 10]
+
+            Button:
+                size_hint_x: 0.1
+                background_normal: 'assets/search_icon.png'  # Icon for search
+                background_down: 'assets/search_icon_pressed.png'
+                size_hint: None, None
+                size: "40dp", "40dp"
+
+        # List Toko Terdekat
+        BoxLayout:
+            orientation: 'vertical'
+            padding: [10, 0]
+
+            Button:
+                text: "Sumber Tani\n3 KM"
+                font_size: "18sp"
+                text_size: self.width, None
+                height: "60dp"
+                background_normal: ''
+                background_color: 0.95, 0.95, 0.95, 1  # Light grey background
+                color: 0, 0, 0, 1
+                halign: 'center'
+                valign: 'middle'
+
+            Button:
+                text: "Berkah Tani\n5 KM"
+                font_size: "18sp"
+                text_size: self.width, None
+                height: "60dp"
+                background_normal: ''
+                background_color: 0.95, 0.95, 0.95, 1  # Light grey background
+                color: 0, 0, 0, 1
+                halign: 'center'
+                valign: 'middle'
+
 
          # Bottom NavBar
         BoxLayout:
