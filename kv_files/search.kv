@@ -127,9 +127,10 @@
             canvas.before:
                 Color:
                     rgba: (1, 0.8, 0.2, 1)  # Warna kuning
-                Rectangle:
+                RoundedRectangle:
                     pos: self.pos
                     size: self.size
+                    radius: [50, 50, 0, 0]
             
             ImageButton:
                 source: 'assets/home.png'  # Ikon Home

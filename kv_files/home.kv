@@ -48,13 +48,13 @@
             padding: [10, 10]
 
             Image:
-                source: "assets/logo.png"  # Ganti dengan gambar produk asli
+                source: "assets/produk/produk1.jpeg"  
             Image:
-                source: "produk2.png"  # Ganti dengan gambar produk asli
+                source: "assets/produk/produk2.jpeg"  
             Image:
-                source: "placeholder.png"  # Placeholder produk
+                source: "assets/produk/produk3.jpeg" 
             Image:
-                source: "placeholder.png"
+                source: "assets/produk/produk4.jpeg"
 
         # Bottom NavBar
         BoxLayout:
@@ -65,9 +65,10 @@
             canvas.before:
                 Color:
                     rgba: (1, 0.8, 0.2, 1)  # Warna kuning
-                Rectangle:
+                RoundedRectangle:
                     pos: self.pos
                     size: self.size
+                    radius: [50, 50, 0, 0]
             
             ImageButton:
                 source: 'assets/home.png'  # Ikon Home
