@@ -3,17 +3,18 @@
     BoxLayout:
         orientation: 'vertical'
         
-        # Header (Yellow background)
+        # Header 
         BoxLayout:
             size_hint_y: None
             height: "100dp"
             padding: [20, 20]
             canvas.before:
                 Color:
-                    rgba: 1, 0.8, 0.2, 1  # Yellow color
-                Rectangle:
+                    rgba: (1, 0.8, 0.2, 1)  # Warna kuning
+                RoundedRectangle:
                     pos: self.pos
                     size: self.size
+                    radius: [0, 0, 50, 50]
 
             Label:
                 text: "Searching"

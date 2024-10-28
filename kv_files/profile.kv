@@ -6,14 +6,15 @@
         # Header
         BoxLayout:
             size_hint_y: None
-            height: "70dp"
+            height: "100dp"
             padding: "10dp"
             canvas.before:
                 Color:
-                    rgba: 1, 0.8, 0.2, 1
-                Rectangle:
-                    size: self.size
+                    rgba: (1, 0.8, 0.2, 1)  # Warna kuning
+                RoundedRectangle:
                     pos: self.pos
+                    size: self.size
+                    radius: [0, 0, 50, 50]
             Label:
                 text: "Profil"
                 font_size: "20sp"
@@ -75,7 +76,7 @@
             Button:
                 background_color: 1, 0.8, 0.2, 1
                 text: "Mulai jual"
-                
+                on_press: root.go_to_verification()
 
             Button:
                 background_color: 1, 0.8, 0.2, 1

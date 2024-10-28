@@ -64,3 +64,6 @@ class ProfileScreen(Screen):
         
     def go_to_aboutus(self):
         self.manager.current = 'aboutus'
+        
+    def go_to_verification(self):
+        self.manager.current = 'verification'

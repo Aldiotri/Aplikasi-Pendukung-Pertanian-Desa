@@ -9,7 +9,7 @@
 <HomeScreen>:
     BoxLayout:
         orientation: 'vertical'
-    
+
         # Header
         BoxLayout:
             size_hint_y: None
@@ -18,9 +18,10 @@
             canvas.before:
                 Color:
                     rgba: (1, 0.8, 0.2, 1)  # Warna kuning
-                Rectangle:
+                RoundedRectangle:
                     pos: self.pos
                     size: self.size
+                    radius: [0, 0, 50, 50]
 
             Label:
                 text: "Selamat Datang"

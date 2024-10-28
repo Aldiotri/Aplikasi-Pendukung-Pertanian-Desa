@@ -1,34 +1,71 @@
 #:kivy 2.0.0
+
 <LoginScreen>:
     BoxLayout:
         orientation: 'vertical'
         padding: [20, 50, 20, 20]
-        spacing: 20
+        spacing: 15
         canvas.before:
             Color:
-                rgba: (0.96, 0.96, 0.96, 1)
+                rgba: (0.96, 0.96, 0.96, 1)  # Light background
             Rectangle:
                 pos: self.pos
                 size: self.size
 
         Label:
             text: 'Login'
-            font_size: 32
-            color: (0.2, 0.6, 0.86, 1)
+            font_size: 28
+            color: (0, 0, 0, 1)  # Text color set to orange
             bold: True
+            halign: 'center'
+            size_hint_y: None
+            height: 40
 
-        TextInput:
-            id: username
-            hint_text: 'Username'
-        
-        TextInput:
-            id: password
+        MinimalTextInput:
+            id: login_email
+            hint_text: 'Email'
+            multiline: False  # Single line input
+            write_tab: False  # Allow Tab key to move focus
+
+        MinimalTextInput:
+            id: login_password
             hint_text: 'Password'
             password: True
-        Button:
+            multiline: False
+            write_tab: False
+
+        MinimalButton:
             text: 'Login'
-            on_press: root.login()
-        Button:
+            on_release: root.login(login_email.text, login_password.text)
+
+        MinimalButton:
             text: 'Daftar'
             on_press: root.go_to_register()
 
+<MinimalTextInput@TextInput>:
+    size_hint_y: None
+    height: 40  # Compact height
+    multiline: False  # Single line input
+    write_tab: False  # Prevent Tab from entering text
+    background_normal: ''  # Remove default background
+    background_active: ''  # No active background
+    padding: [10, 10]
+    font_size: 16
+    foreground_color: (0, 0, 0, 1)  # Black text
+    hint_text_color: (0.7, 0.7, 0.7, 1)  # Light grey hint
+    cursor_color: (0.2, 0.6, 0.86, 1)  # Blue cursor
+
+<MinimalButton@Button>:
+    background_normal: ''  # Remove default background
+    background_color: (1, 0.8, 0.2, 1)  # Orange background
+    color: (1, 1, 1, 1)  # White text
+    font_size: 16
+    size_hint_y: None
+    height: 45
+    canvas.before:
+        Color:
+            rgba: self.background_color
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [22.5]

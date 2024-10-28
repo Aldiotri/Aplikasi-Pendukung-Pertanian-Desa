@@ -16,9 +16,6 @@
             color: 0, 0, 0, 1
 
         Button:
-            text: "NEXT"
-            size_hint: (1, 0.1)
-            on_press: root.go_to_login()
             canvas.before:
                 Color:
                     rgba: (1, 1, 1, 1)  
@@ -26,5 +23,9 @@
                     pos: self.pos
                     size: self.size
                     radius: [30, 30, 30, 30] 
+            text: "NEXT"
+            size_hint: (1, 0.1)
+            on_press: root.go_to_login()
+            
 
 

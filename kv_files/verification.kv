@@ -1,0 +1,149 @@
+#:kivy 2.0.0
+
+<VerificationScreen>:
+    name: "verifikation"
+    BoxLayout:
+        orientation: 'vertical'
+        
+        # Header
+        BoxLayout:
+            size_hint_y: None
+            height: "60dp"
+            padding: [10, 10, 10, 10]
+            canvas.before:
+                Color:
+                    rgba: (1, 0.8, 0.2, 1)  # Warna kuning
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [0, 0, 20, 20]  # Membuat rounded di bagian bawah header
+            Button:
+                text: "<"
+                size_hint_x: None
+                width: "50dp"
+                background_normal: ""
+                background_color: (1, 1, 1, 0)
+                color: (0, 0, 0, 1)
+                on_press: root.manager.current = 'profile'
+            Label:
+                text: "Informasi Toko"
+                bold: True
+                font_size: "18sp"
+                color: (0, 0, 0, 1)  # Warna teks hitam
+                
+           
+        
+        # Progress Bar and Steps
+        BoxLayout:
+            size_hint_y: None
+            height: "60dp"
+            padding: [20, 0]
+            Label:
+                text: "Verifikasi Data Diri"
+                font_size: "14sp"
+                color: (0, 0, 0, 0.6)
+            Label:
+                text: "Informasi Toko"
+                font_size: "14sp"
+                color: (1, 1, 1, 1)  # Warna kuning pada bagian aktif
+            Label:
+                text: "Upload Produk"
+                font_size: "14sp"
+                color: (0, 0, 0, 0.6)
+
+        # Input fields
+        BoxLayout:
+            orientation: 'vertical'
+            padding: [20, 10, 20, 10]
+
+            BoxLayout:
+                orientation: 'horizontal'
+                Label:
+                    text: "Nama Toko"
+                    font_size: '16sp'
+                    color: (0, 0, 0, 1)
+                Label:
+                    text: "0/40"
+                    font_size: '12sp'
+                    color: (0, 0, 0, 0.6)
+
+            TextInput:
+                hint_text: "Masukkan"
+                multiline: False
+                size_hint_y: None
+                height: "40dp"
+                font_size: "14sp"
+
+            BoxLayout:
+                orientation: 'horizontal'
+                Label:
+                    text: "Alamat dan Jasa Pengiriman"
+                    font_size: '16sp'
+                    color: (0, 0, 0, 1)
+                Button:
+                    text: "Atur"
+                    size_hint_x: None
+                    width: "80dp"
+                    background_color: (1, 0.8, 0.2, 1)
+                    color: (0, 0, 0, 1)
+
+            BoxLayout:
+                orientation: 'horizontal'
+                Label:
+                    text: "Email"
+                    font_size: '16sp'
+                    color: (0, 0, 0, 1)
+                Label:
+                    text: "0/40"
+                    font_size: '12sp'
+                    color: (0, 0, 0, 0.6)
+
+            TextInput:
+                hint_text: "Masukkan"
+                multiline: False
+                size_hint_y: None
+                height: "40dp"
+                font_size: "14sp"
+
+            BoxLayout:
+                orientation: 'horizontal'
+                Label:
+                    text: "Nomor Telepon"
+                    font_size: '16sp'
+                    color: (0, 0, 0, 1)
+                Label:
+                    text: "0/15"
+                    font_size: '12sp'
+                    color: (0, 0, 0, 0.6)
+
+            TextInput:
+                hint_text: "Masukkan"
+                multiline: False
+                size_hint_y: None
+                height: "40dp"
+                font_size: "14sp"
+
+        # Bottom Buttons
+        BoxLayout:
+            size_hint_y: None
+            height: "60dp"
+            spacing: 20
+            padding: [20, 10]
+
+            Button:
+                text: "Kembali"
+                size_hint: 0.5, None
+                height: "40dp"
+                background_color: (1, 0.8, 0.2, 1)
+                color: (0, 0, 0, 1)
+                font_size: "16sp"
+                on_press: root.manager.current = 'profile'
+
+            Button:
+                text: "Lanjut"
+                size_hint: 0.5, None
+                height: "40dp"
+                background_color: (1, 0.8, 0.2, 1)
+                color: (0, 0, 0, 1)
+                font_size: "16sp"
+                on_press: app.go_to_next_screen()

@@ -16,8 +16,8 @@ from screens.NotificationScreen import NotificationScreen
 from screens.CartScreen import CartScreen
 from screens.AboutUsScreen import AboutUsScreen
 from screens.IntroScreen import IntroScreen
-
-
+from screens.VerificationScreen import VerificationScreen
+ 
 class MainApp(App):
     def build(self):
         sm = ScreenManager()
@@ -32,6 +32,7 @@ class MainApp(App):
         sm.add_widget(NotificationScreen(name='notification'))
         sm.add_widget(CartScreen(name='cart'))
         sm.add_widget(AboutUsScreen(name='aboutus'))
+        sm.add_widget(VerificationScreen(name='verification'))
         
         return sm
 

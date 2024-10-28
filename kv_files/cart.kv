@@ -6,20 +6,22 @@
         # Header
         BoxLayout:
             size_hint_y: None
-            height: "100dp"  # Mengatur tinggi header menjadi lebih standar
-            padding: [20, 20, 20, 20]
+            height: "100dp"
+            padding: [10, 10, 10, 10]
             canvas.before:
                 Color:
-                    rgba: (1, 0.8, 0.2, 1)  # Warna kuning header
-                Rectangle:
+                    rgba: (1, 0.8, 0.2, 1)  # Warna kuning
+                RoundedRectangle:
                     pos: self.pos
                     size: self.size
+                    radius: [0, 0, 50, 50]
 
             Label:
-                text: "Keranjang kuning"
+                text: "Keranjang"
                 color: (0, 0, 0, 1)  # Warna teks hitam
                 font_size: "24sp"
                 bold: True
+
 
         # Produk di dalam keranjang
         BoxLayout:
