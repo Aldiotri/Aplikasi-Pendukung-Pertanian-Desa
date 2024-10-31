@@ -1,5 +1,6 @@
 #:kivy 2.0.0
 
+
 <LoginScreen>:
     BoxLayout:
         orientation: 'vertical'
@@ -7,15 +8,44 @@
         spacing: 15
         canvas.before:
             Color:
-                rgba: (0.96, 0.96, 0.96, 1)  # Light background
+                rgba: (0.96, 0.96, 0.96, 1)  # Background terang
             Rectangle:
                 pos: self.pos
                 size: self.size
 
+        # Gunakan FloatLayout untuk menempatkan tombol Back di pojok kiri atas
+        FloatLayout:
+            size_hint_y: None
+            height: 50
+
+            MinimalButton:
+                text: 'Back'
+                size_hint: (0.2, 0.8)
+                pos_hint: {"x": 0, "top": 1}  # Posisi di pojok kiri atas
+                on_release: app.root.current = 'intro'
+
+        # Gambar tambahan di bawah logo
+        # Kontainer untuk gambar dengan background lingkaran abu transparan
+            FloatLayout:
+                size_hint: (None, None)
+                size: "120dp", "120dp"
+                pos_hint: {"center_x": 0.5}
+
+                canvas.before:
+                    Color:
+                        rgba: (0.5, 0.5, 0.5, 0.3)  # Warna abu-abu transparan
+                    Ellipse:
+                        pos: self.pos
+                        size: self.size
+        Image:
+            source: 'assets/login.jpeg'
+            size_hint: (0.4, 0.1)
+            pos_hint: {"center_x": 0.5}
+
         Label:
             text: 'Login'
             font_size: 28
-            color: (0, 0, 0, 1)  # Text color set to orange
+            color: (0, 0, 0, 1)
             bold: True
             halign: 'center'
             size_hint_y: None
@@ -24,8 +54,8 @@
         MinimalTextInput:
             id: login_email
             hint_text: 'Email'
-            multiline: False  # Single line input
-            write_tab: False  # Allow Tab key to move focus
+            multiline: False
+            write_tab: False
 
         MinimalTextInput:
             id: login_password
@@ -36,36 +66,43 @@
 
         MinimalButton:
             text: 'Login'
-            on_release: root.login(login_email.text, login_password.text)
+            on_press: root.login(login_email.text, login_password.text)
 
         MinimalButton:
             text: 'Daftar'
-            on_press: root.go_to_register()
+            on_release: app.root.current = 'register'
 
 <MinimalTextInput@TextInput>:
     size_hint_y: None
-    height: 40  # Compact height
-    multiline: False  # Single line input
-    write_tab: False  # Prevent Tab from entering text
-    background_normal: ''  # Remove default background
-    background_active: ''  # No active background
+    height: 40
+    multiline: False
+    write_tab: False
+    background_normal: ''
     padding: [10, 10]
     font_size: 16
-    foreground_color: (0, 0, 0, 1)  # Black text
-    hint_text_color: (0.7, 0.7, 0.7, 1)  # Light grey hint
-    cursor_color: (0.2, 0.6, 0.86, 1)  # Blue cursor
+    foreground_color: (0, 0, 0, 1)
+    hint_text_color: (0.7, 0.7, 0.7, 1)
+    cursor_color: (0.2, 0.6, 0.86, 1)
+
+    canvas.before:
+        Color:
+            rgba: (0.7, 0.7, 0.7, 1)
+        Line:
+            width: 1.5
+            rounded_rectangle: (self.x, self.y, self.width, self.height, 5)
 
 <MinimalButton@Button>:
-    background_normal: ''  # Remove default background
-    background_color: (1, 0.8, 0.2, 1)  # Orange background
-    color: (1, 1, 1, 1)  # White text
+    background_normal: ''
+    background_color: (1, 0.8, 0.2, 1)
+    color: (1, 1, 1, 1)
     font_size: 16
     size_hint_y: None
-    height: 45
+    height: 50
+    width: 200
     canvas.before:
         Color:
             rgba: self.background_color
         RoundedRectangle:
             pos: self.pos
             size: self.size
-            radius: [22.5]
+            radius: [25, 25, 25, 25]
