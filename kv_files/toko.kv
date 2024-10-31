@@ -1,0 +1,166 @@
+#:kivy 2.0.0
+<TokosayaScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        
+        # Header dengan background kuning dan tombol kembali
+
+        BoxLayout:
+            size_hint_y: None
+            height: "80dp"
+            canvas.before:
+                Color:
+                    rgba: 1, 0.9, 0, 1  # Warna kuning
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            
+            Button:
+                text: "<"
+                size_hint_x: 1
+                on_press: root.manager.current = 'profile' 
+
+            Label:
+                text: "Toko saya"
+                font_size: "20sp"
+                bold: True
+                color: 0, 0, 0, 1
+                size_hint_x: 8
+
+            
+        
+        # Bagian Info Toko
+        BoxLayout:
+            orientation: 'horizontal'
+            padding: "10dp"
+            spacing: "10dp"
+
+            Image:
+                source: 'user_icon.png'  # Ganti dengan ikon pengguna yang sesuai
+                size_hint: None, None
+                size: "60dp", "60dp"
+
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    text: "Torodipo.shop"
+                    font_size: "18sp"
+                    color: 0, 0, 0, 1
+                    bold: True
+
+                Label:
+                    text: "www.xyz.com"
+                    font_size: "14sp"
+                    color: 0.5, 0.5, 0.5, 1
+
+        # Bagian Pengumuman Penjual
+        BoxLayout:
+            size_hint_y: None
+            height: "40dp"
+            Label:
+                text: "Pengumuman Penjual"
+                color: 0.5, 0.5, 0.5, 1
+                font_size: "14sp"
+            Button:
+                text: "..."
+                size_hint_x: None
+                width: "40dp"
+
+        # Status Pesanan
+        BoxLayout:
+            orientation: 'vertical'
+            padding: "10dp"
+            spacing: "5dp"
+            
+            Label:
+                text: "Status Pesanan"
+                color: 0, 0, 0, 1
+                font_size: "16sp"
+                bold: True
+
+            BoxLayout:
+                spacing: "10dp"
+                
+                # Tambahkan bagian status seperti 'Perlu Dikirim', 'Pembatalan', dll.
+                BoxLayout:
+                    orientation: 'vertical'
+                    Label:
+                        text: "0"
+                        font_size: "18sp"
+                        bold: True
+                    Label:
+                        text: "Perlu Dikirim"
+                        font_size: "12sp"
+                        color: 0.5, 0.5, 0.5, 1
+                
+                BoxLayout:
+                    orientation: 'vertical'
+                    Label:
+                        text: "0"
+                        font_size: "18sp"
+                        bold: True
+                    Label:
+                        text: "Pembatalan"
+                        font_size: "12sp"
+                        color: 0.5, 0.5, 0.5, 1
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    Label:
+                        text: "0"
+                        font_size: "18sp"
+                        bold: True
+                    Label:
+                        text: "Pengembalian"
+                        font_size: "12sp"
+                        color: 0.5, 0.5, 0.5, 1
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    Label:
+                        text: "0"
+                        font_size: "18sp"
+                        bold: True
+                    Label:
+                        text: "Penilaian Perlu Dibalas"
+                        font_size: "12sp"
+                        color: 0.5, 0.5, 0.5, 1
+
+        # Tombol navigasi ke 'Produk' dan 'Pesanan'
+        # Tombol navigasi ke 'Produk' dan 'Pesanan'
+        BoxLayout:
+            size_hint_y: None
+            height: "80dp"
+            padding: [10, 10]
+            spacing: 10  # Jarak antara tombol
+
+            Button:
+                text: "Produk"
+                font_size: "16sp"
+                color: 0, 0, 0, 1
+                size_hint_x: 1
+                background_normal: ''
+                background_color: 1, 0.8, 0.2, 1  # Warna kuning
+                on_press: root.manager.current = 'product_list'
+                canvas.before:
+                    Color:
+                        rgba: (1, 0.8, 0.2, 1)  # Warna kuning
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [20, 20, 20, 20]  # Membuat sudut rounded
+
+            Button:
+                text: "Pesanan"
+                font_size: "16sp"
+                color: 0, 0, 0, 1
+                size_hint_x: 1
+                background_normal: ''
+                background_color: 1, 0.8, 0.2, 1  # Warna kuning
+                canvas.before:
+                    Color:
+                        rgba: (1, 0.8, 0.2, 1)  # Warna kuning
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [20, 20, 20, 20]  # Membuat sudut rounded

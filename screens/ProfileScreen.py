@@ -67,3 +67,6 @@ class ProfileScreen(Screen):
         
     def go_to_verification(self):
         self.manager.current = 'verification'
+        
+    def go_to_toko(self):
+        self.manager.current = 'toko'

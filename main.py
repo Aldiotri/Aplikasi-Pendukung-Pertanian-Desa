@@ -17,6 +17,9 @@ from screens.CartScreen import CartScreen
 from screens.AboutUsScreen import AboutUsScreen
 from screens.IntroScreen import IntroScreen
 from screens.VerificationScreen import VerificationScreen
+from screens.TokosayaScreen import TokosayaScreen
+from views import ProductList, AddProduct, EditProduct
+
  
 class MainApp(App):
     def build(self):
@@ -33,6 +36,10 @@ class MainApp(App):
         sm.add_widget(CartScreen(name='cart'))
         sm.add_widget(AboutUsScreen(name='aboutus'))
         sm.add_widget(VerificationScreen(name='verification'))
+        sm.add_widget(TokosayaScreen(name='toko'))
+        sm.add_widget(ProductList(name='product_list'))
+        sm.add_widget(AddProduct(name='add_product'))
+        sm.add_widget(EditProduct(name='edit_product'))
         
         return sm
 
