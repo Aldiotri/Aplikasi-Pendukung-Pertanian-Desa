@@ -19,6 +19,7 @@ from screens.IntroScreen import IntroScreen
 from screens.VerificationScreen import VerificationScreen
 from screens.TokosayaScreen import TokosayaScreen
 from views import ProductList, AddProduct, EditProduct
+from kivy_garden.mapview import MapView
 
  
 class MainApp(App):
@@ -26,6 +27,7 @@ class MainApp(App):
         sm = ScreenManager()
         
         # Tambahkan screen ke ScreenManager
+        sm.add_widget(CartScreen(name='cart'))
         sm.add_widget(IntroScreen(name='intro'))
         sm.add_widget(LoginScreen(name='login'))
         sm.add_widget(RegisterScreen(name='register'))
@@ -33,7 +35,7 @@ class MainApp(App):
         sm.add_widget(ProfileScreen(name='profile'))
         sm.add_widget(SearchScreen(name='search'))
         sm.add_widget(NotificationScreen(name='notification'))
-        sm.add_widget(CartScreen(name='cart'))
+        
         sm.add_widget(AboutUsScreen(name='aboutus'))
         sm.add_widget(VerificationScreen(name='verification'))
         sm.add_widget(TokosayaScreen(name='toko'))

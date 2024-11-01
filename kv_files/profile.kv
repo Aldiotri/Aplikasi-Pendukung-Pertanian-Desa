@@ -1,130 +1,136 @@
 #:kivy 2.0.0
+
 <ProfileScreen>:
     BoxLayout:
-        orientation: "vertical"
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1  # Warna latar belakang putih
+            Rectangle:
+                pos: self.pos
+                size: self.size
 
         # Header
         BoxLayout:
             size_hint_y: None
-            height: "100dp"
-            padding: "10dp"
+            height: "120dp"
+            padding: [10, 10]
             canvas.before:
                 Color:
-                    rgba: (1, 0.8, 0.2, 1)  # Warna kuning
+                    rgba: (1, 0.8, 0.2, 1)
                 RoundedRectangle:
                     pos: self.pos
                     size: self.size
                     radius: [0, 0, 50, 50]
+
             Label:
                 text: "Profil"
-                font_size: "20sp"
+                color: (0, 0, 0, 1)
+                font_size: "24sp"
+                bold: True
+
+            Button:
+                size_hint_x: None
+                width: '30dp'  # Mengurangi lebar tombol edit agar sesuai
+                text: "✏️"
                 color: 0, 0, 0, 1
-            Button:
-                size_hint: None, None
-                size: "30dp", "30dp"
-                background_normal: "assets/images/edit_icon.png"
+                background_color: 0, 0, 0, 0  # Transparan
 
-        # Profile picture layout
+        # Bagian profil dengan gambar avatar dan nomor telepon
         BoxLayout:
+            orientation: 'vertical'
             size_hint_y: None
-            height: '150dp'
-            padding: [20, 20, 20, 20]
-            canvas.before:
-                Color:
-                    rgba: 1, 1, 1, 1  # Warna putih
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
+            height: '150dp'  # Tinggi disesuaikan agar proporsional
+            padding: '10dp'
+            spacing: '5dp'
+
             Image:
-                source: 'path_to_profile_picture.png'
+                source: 'assets/profile_image.jpeg'  # Ganti dengan gambar avatar yang sesuai
                 size_hint: None, None
-                size: '100dp', '100dp'
-                allow_stretch: True
-                keep_ratio: False
+                size: '80dp', '80dp'  # Ukuran avatar lebih kecil
+                pos_hint: {'center_x': 0.5}
 
-        # Phone layout
-        BoxLayout:
-            size_hint_y: None
-            height: '50dp'
-            padding: [20, 20, 20, 20]
-            canvas.before:
-                Color:
-                    rgba: 1, 1, 1, 1  # Warna putih
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
             Label:
-                text: 'Phone: 123-456-7890'
-                font_size: '18sp'
-                color: (0, 0, 0, 1)  # Warna teks hitam
+                text: "+62837762542"
+                font_size: '14sp'
+                color: 0.5, 0.5, 0.5, 1
+                halign: 'center'
 
-        # Menu Buttons
+        # Daftar menu
         BoxLayout:
-            orientation: "vertical"
-            padding: "10dp"
-            spacing: "10dp"
-            canvas.before:
-                Color:
-                    rgba: 1, 1, 1, 1  # Warna putih
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
-                    
+            orientation: 'vertical'
+            padding: '5dp'
+            spacing: '5dp'
+
             Button:
-                background_color: 1, 0.8, 0.2, 1
                 text: "Pesan saya"
-            Button:
                 background_color: 1, 0.8, 0.2, 1
-                text: "Mulai jual"
-                on_press: root.go_to_toko()
-
-            Button:
-                background_color: 1, 0.8, 0.2, 1
-                text: "Tentang kami"
-                on_press: root.go_to_aboutus()
-
-            # Tombol Logout
-            Button:
-                text: 'Logout'
+                color: 1, 1, 1, 1
                 size_hint_y: None
-                height: '50dp'
-                background_color: (1, 0.3, 0.3, 1)  # Warna tombol merah
-                on_press: root.open_logout_popup()  # Mengakses metode dari root
-        
-        # Bottom NavBar
+                height: '40dp'  # Mengurangi tinggi tombol agar sesuai
+
+            Button:
+                text: "Mulai jual"
+                background_color: 0.9, 0.9, 0.9, 1
+                color: 0, 0, 0, 1
+                size_hint_y: None
+                height: '40dp'
+                on_release: root.go_to_toko()
+
+            Button:
+                text: "Tentang kami"
+                background_color: 0.9, 0.9, 0.9, 1
+                color: 0, 0, 0, 1
+                size_hint_y: None
+                height: '40dp'
+                on_release: root.go_to_aboutus()
+
+            Button:
+                text: "Logout"
+                size_hint_y: None
+                height: '40dp'
+                on_release: root.open_logout_popup()
+
+         # Bottom NavBar (Diperbaiki)
         BoxLayout:
             size_hint_y: None
             height: "60dp"
-            padding: [5, 10]  # Menghilangkan padding agar tombol memenuhi lebar layar
-            spacing: 0  # Menghilangkan jarak antar tombol
+            spacing: 10
+            padding: [10, 10]
             canvas.before:
                 Color:
-                    rgba: (1, 0.8, 0.2, 1)  # Warna kuning
+                    rgba: (1, 0.8, 0.2, 1)
                 RoundedRectangle:
                     pos: self.pos
                     size: self.size
                     radius: [50, 50, 0, 0]
-            
+
+            # Ikon di NavBar dengan Proporsi Sama
             ImageButton:
-                source: 'assets/home.png'  # Ikon Home
+                source: 'assets/home.png'
+                size_hint_x: 1
                 on_press: root.go_to_home()
-                size_hint_x: 1 
+
 
             ImageButton:
-                source: 'assets/search.png'  # Ikon Search
+                source: 'assets/search.png'
+                size_hint_x: 1
                 on_press: root.go_to_search()
-                size_hint_x: 1 
+
 
             ImageButton:
-                source: 'assets/cart.png'  # Ikon Cart
+                source: 'assets/cart.png'
+                size_hint_x: 1
                 on_press: root.go_to_cart()
-                size_hint_x: 1 
+
 
             ImageButton:
-                source: 'assets/notification.png'  # Ikon Notification
+                source: 'assets/notification.png'
+                size_hint_x: 1
                 on_press: root.go_to_notification()
-                size_hint_x: 1 
+
 
             ImageButton:
-                source: 'assets/profile.png'  # Ikon Profile
-                size_hint_x: 1 
+                source: 'assets/profile.png'
+                size_hint_x: 1
+                on_press: root.go_to_profile()

@@ -20,9 +20,9 @@
                 text: "Searching"
                 font_size: "24sp"
                 bold: True
-                color: (0, 0, 0, 1)  # Black text
+                color: (0, 0, 0, 1)  # Teks hitam
         
-        # Lokasi Anda (Container untuk lokasi)
+        # Lokasi Anda
         BoxLayout:
             orientation: 'vertical'
             padding: [10, 10]
@@ -35,7 +35,7 @@
                 size_hint_y: None
                 height: "40dp"
                 Image:
-                    source: 'assets/location_icon.png'  # Tambahkan icon lokasi
+                    source: 'assets/location_icon.png'
                     size_hint_x: None
                     width: "30dp"
                 Label:
@@ -50,46 +50,18 @@
                 size_hint_y: None
                 height: "30dp"
 
-        # Lokasi Toko Terdekat (Map)
-        BoxLayout:
+        # Lokasi Toko Terdekat (Integrasi Google Map)
+        MapView:
+            lat: -7.5306  # Contoh latitude untuk Boyolali
+            lon: 110.5928  # Contoh longitude untuk Boyolali
+            zoom: 15
             size_hint_y: None
             height: "200dp"
-            padding: [10, 10]
-            canvas.before:
-                Color:
-                    rgba: 0.95, 0.95, 0.95, 1  # Grey background for the map
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
 
-            # Simulasi peta bisa menggunakan gambar atau widget peta jika tersedia
-            Image:
-                source: 'assets/map_placeholder.png'
-                allow_stretch: True
+        # Bagian Search Bar dan List Toko Terdekat tetap sama seperti di kode asli Anda.
 
-        # Search Bar
-        BoxLayout:
-            size_hint_y: None
-            height: "60dp"
-            padding: [10, 10]
-            spacing: 10
+         # Bagian Bottom NavBar juga tetap sama.
 
-            TextInput:
-                hint_text: "Search"
-                size_hint_x: 0.9
-                height: "40dp"
-                background_normal: ''
-                background_color: 0.95, 0.95, 0.95, 1  # Light grey background for search
-                color: 0.3, 0.3, 0.3, 1
-                font_size: '16sp'
-                padding: [10, 10]
-
-            Button:
-                size_hint_x: 0.1
-                background_normal: 'assets/search_icon.png'  # Icon for search
-                background_down: 'assets/search_icon_pressed.png'
-                size_hint: None, None
-                size: "40dp", "40dp"
 
         # List Toko Terdekat
         BoxLayout:

@@ -23,7 +23,8 @@ class LoginScreen(Screen):
             App.get_running_app().root.current = 'home'
         else:
             # Menampilkan pesan kesalahan login
-            self.show_popup('Login Gagal', message)
+            print(f"{message}")
+            self.show_popup('Login Gagal', '')
 
     def show_popup(self, title, message):
         # Membuat popup untuk menampilkan pesan
