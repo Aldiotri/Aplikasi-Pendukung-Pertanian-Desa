@@ -1,4 +1,5 @@
 assets/serviceAccountKey.json
 myenv/
 cache/
-__pycache__
+__pycache__/
+screens/__pycache__/
