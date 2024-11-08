@@ -20,22 +20,27 @@ from screens.VerificationScreen import VerificationScreen
 from screens.TokosayaScreen import TokosayaScreen
 from views import ProductList, AddProduct, EditProduct
 from kivy_garden.mapview import MapView
+from firebase_admin import credentials, db
+import firebase_admin
 
- 
+cred = credentials.Certificate('assets/serviceAccountKey.json')
+firebase_admin.initialize_app(cred, {
+    'databaseURL': 'https://papeda-47fd0-default-rtdb.asia-southeast1.firebasedatabase.app'
+})
 class MainApp(App):
     def build(self):
         sm = ScreenManager()
         
         # Tambahkan screen ke ScreenManager
-        sm.add_widget(CartScreen(name='cart'))
-        sm.add_widget(IntroScreen(name='intro'))
-        sm.add_widget(LoginScreen(name='login'))
-        sm.add_widget(RegisterScreen(name='register'))
+        
+        # sm.add_widget(IntroScreen(name='intro'))
+        # sm.add_widget(LoginScreen(name='login'))
+        # sm.add_widget(RegisterScreen(name='register'))
         sm.add_widget(HomeScreen(name='home'))
         sm.add_widget(ProfileScreen(name='profile'))
         sm.add_widget(SearchScreen(name='search'))
         sm.add_widget(NotificationScreen(name='notification'))
-        
+        sm.add_widget(CartScreen(name='cart'))
         sm.add_widget(AboutUsScreen(name='aboutus'))
         sm.add_widget(VerificationScreen(name='verification'))
         sm.add_widget(TokosayaScreen(name='toko'))
@@ -44,6 +49,11 @@ class MainApp(App):
         sm.add_widget(EditProduct(name='edit_product'))
         
         return sm
+    
+    
+    def update_location(self, map_view):
+        current_lat, current_lon = map_view.get_latlon_at(map_view.center_x, map_view.center_y)
+        print(f"Current Map Center - Latitude: {current_lat}, Longitude: {current_lon}")
 
 if __name__ == "__main__":
     MainApp().run()

@@ -66,7 +66,7 @@ class ProductItem(BoxLayout):
         edit_btn = Button(
             text='Edit',
             size_hint_y=0.5,
-            background_color=(0.3, 0.5, 0.9, 1)
+            background_color=(1, 1, 1, 1)
         )
         edit_btn.bind(on_press=lambda x: edit_callback(product_id, product_data))
         

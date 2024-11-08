@@ -3,8 +3,8 @@
 <ImageButton@ButtonBehavior+Image>:
     size_hint: None, None
     allow_stretch: True
-    keep_ratio: True  # Agar gambar tetap proporsional
-    size: 60, 60  # Ukuran gambar (ikon)
+    keep_ratio: True
+    size: 60, 60
 
 <HomeScreen>:
     BoxLayout:
@@ -25,72 +25,87 @@
 
             Label:
                 text: "Selamat Datang"
-                color: (0, 0, 0, 1)  # Warna teks hitam
+                color: (0, 0, 0, 1)
                 font_size: "24sp"
                 bold: True
 
-        # Title
-        BoxLayout:
-            size_hint_y: None
-            height: "50dp"
-            padding: [10, 0]
-            canvas.before:
-            Label:
-                text: "Produk terlaris"
-                font_size: "20sp"
-                color: (1, 1, 1, 1)  # Warna teks putih
+        ScrollView:
+            do_scroll_x: False  # Hanya scroll vertical
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height  # Agar tinggi mengikuti konten
+                
+                # Lokasi Anda (Teks dan MapView)
+                Label:
+                    text: "Lokasi Anda"
+                    font_size: "20sp"
+                    color: (1, 1, 1, 1)
+                    size_hint_y: None
+                    height: "40dp"
+                    padding_y: 10
 
-        # Produk Grid
-        GridLayout:
-            cols: 2
-            row_default_height: "150dp"
-            row_force_default: True
-            spacing: "10dp"
-            padding: [10, 10]
+                MapView:
+                    size_hint_y: None
+                    height: "200dp"  # Tinggi peta
+                    zoom: 10
+                    lat: -6.200000  # Latitude default
+                    lon: 106.816666  # Longitude default
 
-            Image:
-                source: "assets/produk/produk1.jpeg"  
-            Image:
-                source: "assets/produk/produk2.jpeg"  
-            Image:
-                source: "assets/produk/produk3.jpeg" 
-            Image:
-                source: "assets/produk/produk4.jpeg"
+                # Produk Terlaris
+                Label:
+                    text: "Produk Terlaris"
+                    font_size: "20sp"
+                    color: (1, 1, 1, 1)
+                    size_hint_y: None
+                    height: "50dp"
+                    padding_y: 10
+
+                  # GridLayout untuk menampilkan produk
+                GridLayout:
+                    id: product_grid
+                    cols: 2
+                    row_default_height: "250dp"
+                    row_force_default: True
+                    spacing: "10dp"
+                    padding: [10, 10]
+
+                
 
         # Bottom NavBar
         BoxLayout:
             size_hint_y: None
             height: "60dp"
-            padding: [5, 10]  # Menghilangkan padding agar tombol memenuhi lebar layar
-            spacing: 0  # Menghilangkan jarak antar tombol
+            padding: [5, 10]
+            spacing: 0
             canvas.before:
                 Color:
-                    rgba: (1, 0.8, 0.2, 1)  # Warna kuning
+                    rgba: (1, 0.8, 0.2, 1)
                 RoundedRectangle:
                     pos: self.pos
                     size: self.size
                     radius: [50, 50, 0, 0]
-            
+
             ImageButton:
-                source: 'assets/home.png'  # Ikon Home
+                source: 'assets/home.png'
                 size_hint_x: 1 
 
             ImageButton:
-                source: 'assets/search.png'  # Ikon Search
+                source: 'assets/search.png'
                 on_press: root.go_to_search()
                 size_hint_x: 1 
 
             ImageButton:
-                source: 'assets/cart.png'  # Ikon Cart
+                source: 'assets/cart.png'
                 on_press: root.go_to_cart()
                 size_hint_x: 1 
 
             ImageButton:
-                source: 'assets/notification.png'  # Ikon Notification
+                source: 'assets/notification.png'
                 on_press: root.go_to_notification()
                 size_hint_x: 1 
 
             ImageButton:
-                source: 'assets/profile.png'  # Ikon Profile
+                source: 'assets/profile.png'
                 on_press: root.go_to_profile()
                 size_hint_x: 1 

@@ -23,7 +23,8 @@ class RegisterScreen(Screen):
             App.get_running_app().root.current = 'login'
         else:
             # Menampilkan pesan kesalahan jika registrasi gagal
-            self.show_popup('Gagal', message)
+            print(f"{message}")
+            self.show_popup('Pendaftaran Gagal', '')
 
     def show_popup(self, title, message):
         # Membuat popup untuk menampilkan pesan kesalahan

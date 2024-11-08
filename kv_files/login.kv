@@ -60,6 +60,19 @@
             text: 'Daftar'
             on_release: app.root.current = 'register'
 
+         # Social Login Options
+        BoxLayout:
+            size_hint_y: None
+            height: 50
+            spacing: 20
+            padding: [50, 0]
+            Image:
+                source: 'assets/google.jpeg'
+                pos_hint: {"center_x": 0.5}
+            Image:
+                source: 'assets/facebook.jpeg'
+                pos_hint: {"center_x": 0.5}
+
 <MinimalTextInput@TextInput>:
     size_hint_y: None
     height: 40

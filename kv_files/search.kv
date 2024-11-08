@@ -2,8 +2,8 @@
 <SearchScreen>:
     BoxLayout:
         orientation: 'vertical'
-        
-        # Header 
+
+        # Header dan Search Bar
         BoxLayout:
             size_hint_y: None
             height: "100dp"
@@ -20,78 +20,44 @@
                 text: "Searching"
                 font_size: "24sp"
                 bold: True
-                color: (0, 0, 0, 1)  # Teks hitam
-        
-        # Lokasi Anda
-        BoxLayout:
-            orientation: 'vertical'
-            padding: [10, 10]
-            spacing: 10
-            size_hint_y: None
-            height: "120dp"
-            
+                color: (0, 0, 0, 1)
+
+        # Grid untuk Produk
+        ScrollView:
+            do_scroll_x: False  # Hanya scroll vertical
             BoxLayout:
-                spacing: 5
+                orientation: 'vertical'
                 size_hint_y: None
-                height: "40dp"
-                Image:
-                    source: 'assets/location_icon.png'
-                    size_hint_x: None
-                    width: "30dp"
-                Label:
-                    text: "Lokasi anda"
-                    font_size: "18sp"
-                    color: (0, 0, 0, 1)
-            
-            Label:
-                text: "Boyolali, Boyolali, Kabupaten Boyolali, Jawa Tengah"
-                font_size: "14sp"
-                color: (0.3, 0.3, 0.3, 1)
-                size_hint_y: None
-                height: "30dp"
+                height: self.minimum_height 
 
-        # Lokasi Toko Terdekat (Integrasi Google Map)
-        MapView:
-            lat: -7.5306  # Contoh latitude untuk Boyolali
-            lon: 110.5928  # Contoh longitude untuk Boyolali
-            zoom: 15
-            size_hint_y: None
-            height: "200dp"
+                # Search Input dan Button
+                TextInput:
+                    id: search_input
+                    hint_text: "Cari produk atau toko..."
+                    size_hint_y: None
+                    height: "40dp"
+                    background_normal: ''
+                    background_color: 1, 1, 1, 1
+                    multiline: False
+                    on_text_validate: root.search_products(search_input.text)
 
-        # Bagian Search Bar dan List Toko Terdekat tetap sama seperti di kode asli Anda.
+                Button:
+                    text: "Cari"
+                    size_hint_y: None
+                    height: "40dp"
+                    on_release: root.search_products(search_input.text)  # Kirimkan text input ke fungsi
 
-         # Bagian Bottom NavBar juga tetap sama.
+                GridLayout:
+                    id: product_grid
+                    cols: 2
+                    row_default_height: "250dp"
+                    row_force_default: True
+                    spacing: "10dp"
+                    padding: [10, 10]
 
+              
 
-        # List Toko Terdekat
-        BoxLayout:
-            orientation: 'vertical'
-            padding: [10, 0]
-
-            Button:
-                text: "Sumber Tani\n3 KM"
-                font_size: "18sp"
-                text_size: self.width, None
-                height: "60dp"
-                background_normal: ''
-                background_color: 0.95, 0.95, 0.95, 1  # Light grey background
-                color: 0, 0, 0, 1
-                halign: 'center'
-                valign: 'middle'
-
-            Button:
-                text: "Berkah Tani\n5 KM"
-                font_size: "18sp"
-                text_size: self.width, None
-                height: "60dp"
-                background_normal: ''
-                background_color: 0.95, 0.95, 0.95, 1  # Light grey background
-                color: 0, 0, 0, 1
-                halign: 'center'
-                valign: 'middle'
-
-
-         # Bottom NavBar
+        # Bottom NavBar
         BoxLayout:
             size_hint_y: None
             height: "60dp"
