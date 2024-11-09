@@ -6,7 +6,7 @@ from kivy.clock import mainthread
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivy.uix.image import Image
-
+from kivy.uix.image import AsyncImage
 
 
 # Muat file KV untuk SearchScreen
@@ -58,7 +58,7 @@ class SearchScreen(Screen):
 
         for key, product in products.items():
             box = BoxLayout(orientation='vertical', size_hint_y=None, height="200dp")
-            box.add_widget(Image(source=product['image_url'], size_hint=(1, 0.8)))
+            box.add_widget(AsyncImage(source=product['image_url'], size_hint=(1, 0.8)))
             box.add_widget(Label(text=product['nama'], size_hint=(1, 0.1), color=(1, 1, 1, 1)))
             box.add_widget(Label(text=f"Rp {product['harga']}", size_hint=(1, 0.1), color=(1, 0, 0, 1)))
             grid.add_widget(box)

@@ -7,7 +7,7 @@ from kivy.uix.label import Label
 
 # Muat file KV untuk LoginScreen
 Builder.load_file("kv_files/login.kv")
-Builder.load_file("kv_files/home.kv")
+# Builder.load_file("kv_files/home.kv")
 
 # Buat instance AuthService
 auth_service = AuthService()
