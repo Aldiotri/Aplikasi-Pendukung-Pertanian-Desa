@@ -9,6 +9,9 @@ from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import ButtonBehavior
+import random
+from kivy.uix.spinner import Spinner
+from kivy.uix.textinput import TextInput
 
 class ProductBox(ButtonBehavior, BoxLayout):
     def __init__(self, product, on_click, **kwargs):
@@ -23,7 +26,7 @@ class ProductBox(ButtonBehavior, BoxLayout):
         self.add_widget(AsyncImage(source=product['image_url'], size_hint=(1, 0.8)))
 
         # Nama dan harga produk
-        self.add_widget(Label(text=product['nama'], size_hint=(1, 0.1), color=(1, 1, 1, 1)))
+        self.add_widget(Label(text=product['nama'], size_hint=(1, 0.1), color=(0, 0, 0, 1)))
         self.add_widget(Label(text=f"Rp {product['harga']}", size_hint=(1, 0.1), color=(1, 0, 0, 1)))
 
     def on_release(self):
@@ -73,21 +76,67 @@ class HomeScreen(Screen):
 
         # Detail produk
         layout.add_widget(Label(text=f"Nama: {product['nama']}", font_size="18sp"))
-        layout.add_widget(Label(text=f"Harga: Rp {product['harga']}", font_size="18sp"))
+        layout.add_widget(Label(text=f"Harga: Rp {product['harga']:,}".replace(",", "."), font_size="18sp"))
         layout.add_widget(Label(text=f"Stok: {product.get('stok', 'Tidak diketahui')}", font_size="18sp"))
 
         # Tombol untuk checkout dan tambah ke keranjang
-        button_layout = BoxLayout(size_hint=(1, 0.2))
-        add_to_cart_button = Button(text="Tambah ke Keranjang")
+        button_layout = BoxLayout(size_hint=(1, 0.5))
+        add_to_cart_button = Button(text="Masukkan Keranjang")
         add_to_cart_button.bind(on_press=lambda x: self.add_to_cart(product))
         button_layout.add_widget(add_to_cart_button)
-        button_layout.add_widget(Button(text="Checkout"))
-        layout.add_widget(button_layout)
 
+        checkout_button = Button(text="Checkout")
+        checkout_button.bind(on_press=lambda x: self.checkout_popup(product))
+        button_layout.add_widget(checkout_button)
+
+        layout.add_widget(button_layout)
         popup = Popup(title="Detail Produk", content=layout, size_hint=(0.8, 0.8))
         popup.open()
 
+    def checkout_popup(self, product):
+        """Menampilkan popup checkout dengan rincian total harga dan informasi tambahan"""
+        layout = BoxLayout(orientation='vertical', padding=20, spacing=15)
+
+        # Menghitung ongkos kirim acak antara Rp 15.000 hingga Rp 30.000
+        ongkos_kirim = random.randint(15000, 30000)
+        total_harga = product['harga']
+        total_pembayaran = total_harga + ongkos_kirim
+
+        # Total harga produk
+        layout.add_widget(Label(text=f"Total Harga Produk: Rp {total_harga:,}".replace(",", "."), font_size="18sp"))
+
+        # Alamat pengiriman
+        layout.add_widget(Label(text="Alamat Pengiriman:", font_size="16sp"))
+        alamat_pengiriman = TextInput(hint_text="Masukkan alamat pengiriman", multiline=False, font_size="16sp")
+        layout.add_widget(alamat_pengiriman)
+
+        # Ongkos kirim
+        layout.add_widget(Label(text=f"Ongkos Kirim: Rp {ongkos_kirim:,}".replace(",", "."), font_size="16sp"))
+
+        # Metode pembayaran
+        layout.add_widget(Label(text="Metode Pembayaran:", font_size="16sp"))
+        metode_pembayaran = Spinner(
+            text="Pilih metode pembayaran",
+            values=["COD", "Transfer Bank", "Alfamart/Indomart"],
+            size_hint=(1, None),
+            height="40dp",
+            font_size="16sp",
+        )
+        layout.add_widget(metode_pembayaran)
+
+        # Total pembayaran
+        layout.add_widget(Label(text=f"Total Pembayaran: Rp {total_pembayaran:,}".replace(",", "."), font_size="18sp"))
+
+        # Tombol untuk melanjutkan ke pembayaran
+        tombol_checkout = Button(text="Buat Pesanan", size_hint=(1, 0.8), font_size="18sp")
+        layout.add_widget(tombol_checkout)
+
+        # Menampilkan popup dengan ukuran ramah Android
+        popup = Popup(title="Checkout", content=layout, size_hint=(0.9, 0.9))
+        popup.open()
+
     def add_to_cart(self, product):
+        """Menambahkan produk ke keranjang di Firebase, termasuk foto produk"""
         cart_ref = db.reference('cart')  # Akses ke node cart di Firebase
         cart_items = cart_ref.get()  # Ambil data keranjang
 
@@ -105,12 +154,14 @@ class HomeScreen(Screen):
                 cart_ref.push({
                     'name': product['nama'],
                     'price': product['harga'],
-                    'quantity': 1
+                    'quantity': 1,
+                    'image_url': product['image_url']  # Menyimpan URL gambar produk
                 })
         else:
             # Jika keranjang kosong, langsung tambahkan produk
             cart_ref.push({
                 'name': product['nama'],
                 'price': product['harga'],
-                'quantity': 1
+                'quantity': 1,
+                'image_url': product['image_url']  # Menyimpan URL gambar produk
             })

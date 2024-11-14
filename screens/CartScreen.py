@@ -9,25 +9,46 @@ from firebase_admin import db
 from kivy.graphics import Color, RoundedRectangle
 import random
 from kivy.uix.spinner import Spinner
+from kivy.clock import Clock
 
 class CartScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.setup_listener()  # Pasang listener untuk pembaruan otomatis
+        self.cart_ref = db.reference('cart')  # Inisialisasi referensi ke node "cart" di Firebase
+        self.refresh_event = None  # Variabel untuk menyimpan event refresh
+        self.setup_listener()
 
     def setup_listener(self):
         """Pasang listener untuk mendeteksi perubahan pada data keranjang"""
-        self.cart_ref = db.reference('cart')
         self.cart_ref.listen(self.on_cart_update)
 
     def on_cart_update(self, event):
         """Panggil ketika ada pembaruan pada data keranjang"""
         self.load_cart()
 
+    def on_enter(self):
+        """Memulai interval refresh saat layar ini diaktifkan"""
+        self.start_refresh_timer()
+
+    def on_leave(self):
+        """Menghentikan interval refresh saat layar ini tidak aktif"""
+        self.stop_refresh_timer()
+
+    def start_refresh_timer(self):
+        """Memulai interval untuk memuat ulang data keranjang setiap 5 detik"""
+        if self.refresh_event is None:  # Pastikan hanya satu event yang berjalan
+            self.refresh_event = Clock.schedule_interval(lambda dt: self.load_cart(), 0.5)  # 5 detik
+
+    def stop_refresh_timer(self):
+        """Menghentikan interval refresh"""
+        if self.refresh_event is not None:
+            self.refresh_event.cancel()
+            self.refresh_event = None
+
     def load_cart(self):
-        """Memuat item keranjang dan menampilkan pada UI"""
-        self.ids.cart_grid.clear_widgets()  # Menghapus widget yang lama
-        cart_items = self.cart_ref.get()  # Mendapatkan data keranjang dari Firebase
+        """Memuat data keranjang dari Firebase"""
+        self.ids.cart_grid.clear_widgets()  # Bersihkan tampilan keranjang
+        cart_items = self.cart_ref.get()  # Ambil data keranjang dari Firebase
 
         if cart_items:
             for item_id, item_data in cart_items.items():
@@ -143,16 +164,16 @@ class CartScreen(Screen):
         # Menampilkan total pembayaran dengan format Rupiah
         layout.add_widget(Label(text=f"Total Pembayaran: {self.format_rupiah(total_pembayaran)}", font_size="18sp"))
 
-        tombol_checkout = Button(text="Checkout", size_hint=(1, 0.8), font_size="18sp")
+        tombol_checkout = Button(text="Buat Pesanan", size_hint=(1, 0.8), font_size="18sp")
         layout.add_widget(tombol_checkout)
 
         # Menampilkan popup dengan ukuran ramah Android
         popup = Popup(title="Checkout", content=layout, size_hint=(0.9, 0.9), auto_dismiss=True)
         popup.open()
 
-    def refresh_cart(self):
-        """Menyegarkan tampilan keranjang"""
-        self.load_cart()
+    # def refresh_cart(self):
+    #     """Menyegarkan tampilan keranjang"""
+    #     self.load_cart()
 
     # Navigasi ke layar lain
     def go_to_search(self):

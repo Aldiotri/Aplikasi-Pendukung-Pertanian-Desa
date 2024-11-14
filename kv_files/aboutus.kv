@@ -2,7 +2,12 @@
 <AboutUsScreen>:
     BoxLayout:
         orientation: 'vertical'
-
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1  # Warna latar belakang putih
+            Rectangle:
+                pos: self.pos
+                size: self.size
         # Header
         BoxLayout:
             size_hint_y: None
@@ -33,7 +38,7 @@
                 Label:
                     text: "Aplikasi Pendukung Pertanian Desa"
                     font_size: '22sp'
-                    color: (1, 1, 1, 1)
+                    color: (0, 0, 0, 1)
                     bold: True
                     size_hint_y: None
                     height: '40dp'
@@ -41,7 +46,7 @@
                 Label:
                     text: "Kami adalah tim yang berdedikasi untuk menyediakan solusi digital yang membantu meningkatkan pertanian di desa-desa. Aplikasi ini dirancang untuk mempermudah akses informasi bagi para petani dan memberikan kemudahan dalam pengelolaan hasil pertanian."
                     font_size: '16sp'
-                    color: (1, 1, 1, 1)
+                    color: (0, 0, 0, 1)
                     size_hint_y: None
                     height: '100dp'
                     halign: 'left'
@@ -51,7 +56,7 @@
                 Label:
                     text: "Visi Kami"
                     font_size: '20sp'
-                    color: (1, 1, 1, 1)
+                    color: (0, 0, 0, 1)
                     bold: True
                     size_hint_y: None
                     height: '40dp'
@@ -59,7 +64,7 @@
                 Label:
                     text: "Membawa teknologi modern ke tangan petani desa untuk meningkatkan produktivitas, efisiensi, dan kualitas hidup mereka."
                     font_size: '16sp'
-                    color: (1, 1, 1, 1)
+                    color: (0, 0, 0, 1)
                     size_hint_y: None
                     height: '80dp'
                     halign: 'left'
@@ -69,7 +74,7 @@
                 Label:
                     text: "Misi Kami"
                     font_size: '20sp'
-                    color: (1, 1, 1, 1)
+                    color: (0, 0, 0, 1)
                     bold: True
                     size_hint_y: None
                     height: '40dp'
@@ -77,7 +82,7 @@
                 Label:
                     text: "1. Mengedukasi para petani dengan informasi yang mudah diakses dan relevan.\n2. Memberikan solusi digital untuk pengelolaan lahan, bibit, dan hasil panen.\n3. Menyediakan platform komunikasi antar petani dan distributor untuk memaksimalkan pemasaran hasil pertanian."
                     font_size: '16sp'
-                    color: (1, 1, 1, 1)
+                    color: (0, 0, 0, 1)
                     size_hint_y: None
                     height: '160dp'
                     halign: 'left'
