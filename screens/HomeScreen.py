@@ -12,6 +12,7 @@ from kivy.uix.button import ButtonBehavior
 import random
 from kivy.uix.spinner import Spinner
 from kivy.uix.textinput import TextInput
+from datetime import datetime
 
 class ProductBox(ButtonBehavior, BoxLayout):
     def __init__(self, product, on_click, **kwargs):
@@ -94,27 +95,20 @@ class HomeScreen(Screen):
         popup.open()
 
     def checkout_popup(self, product):
-        """Menampilkan popup checkout dengan rincian total harga dan informasi tambahan"""
         layout = BoxLayout(orientation='vertical', padding=20, spacing=15)
 
-        # Menghitung ongkos kirim acak antara Rp 15.000 hingga Rp 30.000
         ongkos_kirim = random.randint(15000, 30000)
         total_harga = product['harga']
         total_pembayaran = total_harga + ongkos_kirim
 
-        # Total harga produk
         layout.add_widget(Label(text=f"Total Harga Produk: Rp {total_harga:,}".replace(",", "."), font_size="18sp"))
 
-        # Alamat pengiriman
-        layout.add_widget(Label(text="Alamat Pengiriman:", font_size="16sp"))
         alamat_pengiriman = TextInput(hint_text="Masukkan alamat pengiriman", multiline=False, font_size="16sp")
+        layout.add_widget(Label(text="Alamat Pengiriman:", font_size="16sp"))
         layout.add_widget(alamat_pengiriman)
 
-        # Ongkos kirim
         layout.add_widget(Label(text=f"Ongkos Kirim: Rp {ongkos_kirim:,}".replace(",", "."), font_size="16sp"))
 
-        # Metode pembayaran
-        layout.add_widget(Label(text="Metode Pembayaran:", font_size="16sp"))
         metode_pembayaran = Spinner(
             text="Pilih metode pembayaran",
             values=["COD", "Transfer Bank", "Alfamart/Indomart"],
@@ -122,18 +116,42 @@ class HomeScreen(Screen):
             height="40dp",
             font_size="16sp",
         )
+        layout.add_widget(Label(text="Metode Pembayaran:", font_size="16sp"))
         layout.add_widget(metode_pembayaran)
 
-        # Total pembayaran
         layout.add_widget(Label(text=f"Total Pembayaran: Rp {total_pembayaran:,}".replace(",", "."), font_size="18sp"))
 
-        # Tombol untuk melanjutkan ke pembayaran
         tombol_checkout = Button(text="Buat Pesanan", size_hint=(1, 0.8), font_size="18sp")
+        tombol_checkout.bind(on_press=lambda x: self.create_order(product, alamat_pengiriman.text, ongkos_kirim, total_pembayaran, metode_pembayaran.text))
         layout.add_widget(tombol_checkout)
 
-        # Menampilkan popup dengan ukuran ramah Android
         popup = Popup(title="Checkout", content=layout, size_hint=(0.9, 0.9))
         popup.open()
+
+    def create_order(self, product, alamat_pengiriman, ongkos_kirim, total_pembayaran, metode_pembayaran):
+        order_ref = db.reference('orders')
+        order_data = {
+            'product_name': product['nama'],
+            'price': product['harga'],
+            'shipping_cost': ongkos_kirim,
+            'total_payment': total_pembayaran,
+            'shipping_address': alamat_pengiriman,
+            'payment_method': metode_pembayaran,
+            'timestamp': datetime.now().isoformat()
+        }
+        order_ref.push(order_data)
+
+        # Tambahkan data checkout ke notifikasi di Firebase
+        notification_ref = db.reference('/notifications')
+        notification_data = {
+            'message': f"Pesanan untuk {product['nama']} berhasil dibuat dengan total pembayaran Rp {total_pembayaran:,}".replace(",", "."),
+            'timestamp': datetime.now().isoformat()
+        }
+        notification_ref.push(notification_data)
+        
+        # Tampilkan popup atau dialog sukses
+        success_popup = Popup(title="Pesanan Berhasil", content=Label(text="Pesanan Anda berhasil dibuat!"), size_hint=(0.7, 0.4))
+        success_popup.open()
 
     def add_to_cart(self, product):
         """Menambahkan produk ke keranjang di Firebase, termasuk foto produk"""

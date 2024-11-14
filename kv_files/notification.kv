@@ -30,9 +30,30 @@
         ScrollView:
             BoxLayout:
                 orientation: 'vertical'
-                padding: 10
+                size_hint_y: None
+                height: self.height
+                padding: [10, 10, 10, 10]  
                 spacing: 10
-                id: notification_list
+                id: notification_list  # Id untuk daftar notifikasi
+        
+        # Berita Terkini
+        Label:
+            text: "Berita Terkini"
+            font_size: 20
+            color: (0, 0, 0, 1)
+            size_hint_y: None
+            height: 40
+            padding: [10, 10, 10, 10]
+
+        # ScrollView untuk menampilkan berita terkini
+        ScrollView:
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.height
+                padding: [10, 10, 10, 10]
+                spacing: 10
+                id: latest_news_list 
 
         # Bottom NavBar
         BoxLayout:
