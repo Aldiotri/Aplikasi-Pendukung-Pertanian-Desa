@@ -27,15 +27,30 @@ cred = credentials.Certificate('assets/serviceAccountKey.json')
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://papeda-47fd0-default-rtdb.asia-southeast1.firebasedatabase.app'
 })
+
+# Muat kv_files
+Builder.load_file("kv_files/intro.kv")
+Builder.load_file("kv_files/login.kv")
+Builder.load_file("kv_files/register.kv")
+Builder.load_file("kv_files/home.kv")
+Builder.load_file("kv_files/search.kv")
+Builder.load_file("kv_files/cart.kv")
+Builder.load_file("kv_files/notification.kv")
+Builder.load_file("kv_files/profile.kv")
+Builder.load_file("kv_files/aboutus.kv")
+Builder.load_file("kv_files/toko.kv")
+Builder.load_file("kv_files/verification.kv")
+
+
 class MainApp(App):
     def build(self):
         sm = ScreenManager()
         
         # Tambahkan screen ke ScreenManager
         
-        # sm.add_widget(IntroScreen(name='intro'))
-        # sm.add_widget(LoginScreen(name='login'))
-        # sm.add_widget(RegisterScreen(name='register'))
+        sm.add_widget(IntroScreen(name='intro'))
+        sm.add_widget(LoginScreen(name='login'))
+        sm.add_widget(RegisterScreen(name='register'))
         sm.add_widget(HomeScreen(name='home'))
         sm.add_widget(ProfileScreen(name='profile'))
         sm.add_widget(SearchScreen(name='search'))

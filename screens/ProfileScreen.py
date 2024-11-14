@@ -7,8 +7,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.widget import Widget
-# Muat file KV untuk ProfileScreen
-Builder.load_file("kv_files/profile.kv")
+
 
 class ProfileScreen(Screen):
     pass

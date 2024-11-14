@@ -2,11 +2,16 @@
 <NotificationScreen>:
     BoxLayout:
         orientation: 'vertical'
-        
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1  # Warna latar belakang putih
+            Rectangle:
+                pos: self.pos
+                size: self.size
         # Header
         BoxLayout:
             size_hint_y: None
-            height: "100dp"
+            height: "120dp"
             padding: [10, 10, 10, 10]
             canvas.before:
                 Color:

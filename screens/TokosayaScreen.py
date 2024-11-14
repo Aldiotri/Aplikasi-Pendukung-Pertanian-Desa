@@ -1,9 +1,6 @@
 from kivy.uix.screenmanager import Screen
 from kivy.lang import Builder
 
-# Muat file KV untuk TokosayaScreen
-Builder.load_file("kv_files/toko.kv")
-
 class TokosayaScreen(Screen):
     pass
     def go_to_toko(self):

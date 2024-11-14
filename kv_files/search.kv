@@ -2,11 +2,16 @@
 <SearchScreen>:
     BoxLayout:
         orientation: 'vertical'
-
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1  # Warna latar belakang putih
+            Rectangle:
+                pos: self.pos
+                size: self.size
         # Header dan Search Bar
         BoxLayout:
             size_hint_y: None
-            height: "100dp"
+            height: "120dp"
             padding: [20, 20]
             canvas.before:
                 Color:

@@ -9,7 +9,12 @@
 <HomeScreen>:
     BoxLayout:
         orientation: 'vertical'
-
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1  # Warna latar belakang putih
+            Rectangle:
+                pos: self.pos
+                size: self.size
         # Header
         BoxLayout:
             size_hint_y: None
@@ -33,6 +38,8 @@
             id: scrollview
             do_scroll_x: False  # Hanya scroll vertical
             BoxLayout:
+                padding: [10, 10, 10, 10]
+                spacing: 10
                 orientation: 'vertical'
                 size_hint_y: None
                 height: self.minimum_height  # Agar tinggi mengikuti konten
@@ -41,13 +48,14 @@
                 Label:
                     text: "Lokasi Anda"
                     font_size: "20sp"
-                    color: (1, 1, 1, 1)
+                    color: (0, 0, 0, 1)
                     size_hint_y: None
                     height: "40dp"
                     padding_y: 10
 
                 MapView:
                     size_hint_y: None
+                    padding: [10, 10]
                     height: "200dp"  # Tinggi peta
                     zoom: 10
                     lat: -6.200000  # Latitude default
@@ -57,7 +65,7 @@
                 Label:
                     text: "Produk Terlaris"
                     font_size: "20sp"
-                    color: (1, 1, 1, 1)
+                    color: (0, 0, 0, 1)
                     size_hint_y: None
                     height: "50dp"
                     padding_y: 10
@@ -70,7 +78,12 @@
                     row_force_default: True
                     spacing: "10dp"
                     padding: [10, 10]
-
+                    # Contoh item produk
+                    Button:
+                        text: "Produk 1"
+                        size_hint_y: None
+                        height: "200dp"
+                        on_release: app.show_product_detail("Produk 1", "100000", "10")
                 
 
         # Bottom NavBar

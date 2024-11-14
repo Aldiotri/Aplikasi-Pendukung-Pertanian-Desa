@@ -5,8 +5,6 @@ from kivy.uix.label import Label
 from kivy.app import App
 from auth import AuthService
 
-# Muat file KV untuk RegisterScreen
-Builder.load_file("kv_files/register.kv")
 
 # Buat instance AuthService
 auth_service = AuthService()

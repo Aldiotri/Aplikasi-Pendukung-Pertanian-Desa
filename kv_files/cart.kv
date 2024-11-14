@@ -2,172 +2,82 @@
 <CartScreen>:
     BoxLayout:
         orientation: 'vertical'
-        
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1  # Warna latar belakang putih
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
         # Header
+        BoxLayout:
+            size_hint_y: None
+            height: "120dp"
+            padding: [10, 10]
+            canvas.before:
+                Color:
+                    rgba: (1, 0.8, 0.2, 1)
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [0, 0, 50, 50]
+
+            Label:
+                text: "Keranjang"
+                color: (0, 0, 0, 1)
+                font_size: "24sp"
+                bold: True
+
+            ImageButton:
+                source: 'assets/refresh.png'
+                size_hint_x: 0.1
+                size_hint_y: 1
+                width: '30dp'
+                text: "Ref"
+                color: 0, 0, 0, 1
+                background_color: 0, 0, 0, 0  # Transparan
+                on_press: root.refresh_cart()
+
+        # ScrollView untuk item di keranjang
         ScrollView:
-            BoxLayout:
+            size_hint_y: 0.8
+
+            GridLayout:
+                id: cart_grid
+                cols: 1
+                padding: 10
+                spacing: 10
                 size_hint_y: None
-                height: "100dp"
-                padding: [10, 10, 10, 10]
-                canvas.before:
-                    Color:
-                        rgba: (1, 0.8, 0.2, 1)  # Warna kuning
-                    RoundedRectangle:
-                        pos: self.pos
-                        size: self.size
-                        radius: [0, 0, 50, 50]
+                height: self.minimum_height
+                
 
-                Label:
-                    text: "Contoh"
-                    color: (0, 0, 0, 1)  # Warna teks hitam
-                    font_size: "24sp"
-                    bold: True
-
-            # Label:
-            #     text: 'Pesanan dan promo terbaru akan muncul disini...'
-        #     font_size: 16
-        #     color: (0.4, 0.4, 0.4, 1)
-
-        
-
-        # Produk di dalam keranjang
+        # Checkout button container
         BoxLayout:
             size_hint_y: None
-            height: "120dp"
+            height: '50dp'
+            orientation: 'horizontal'
             padding: [10, 10]
-            spacing: 10
             canvas.before:
                 Color:
-                    rgba: (1, 0.9, 0.8, 1)  # Warna latar belakang produk
-                Rectangle:
+                    rgba: 0, 0.5, 0.8, 1  
+                RoundedRectangle:
                     pos: self.pos
                     size: self.size
+                    radius: [20]
 
-            Image:
-                source: "assets/produk/produk3.jpeg"  # Ganti dengan gambar produk asli
-                size_hint_x: None
-                width: "100dp"
-                allow_stretch: True
-
-            BoxLayout:
-                orientation: 'vertical'
-                padding: [10, 0]
-
-                Label:
-                    text: "Benih Padi Inpari"
-                    font_size: "18sp"
-                    color: (0, 0, 0, 1)  # Warna teks hitam
-
-                Label:
-                    text: "Rp. 50.000"
-                    font_size: "16sp"
-                    color: (0, 0, 0, 1)
-
-            BoxLayout:
-                orientation: 'horizontal'
-                size_hint_x: None
-                width: "100dp"
-
-                Button:
-                    text: "-"
-                    on_press: root.decrement_item()
-                    size_hint: None, None
-                    size: "40dp", "40dp"
-
-                Label:
-                    id: item_count
-                    text: "1"
-                    color: (0, 0, 0, 1)
-                    font_size: "18sp"
-                    size_hint_x: None
-                    width: "40dp"
-                    text_size: self.size
-                    halign: "center"
-                    valign: "middle"
-
-                Button:
-                    text: "+"
-                    on_press: root.increment_item()
-                    size_hint: None, None
-                    size: "40dp", "40dp"
-
-        # Tombol Checkout
-        BoxLayout:
-            size_hint_y: None
-            height: "120dp"
-            padding: [10, 10]
-            spacing: 10
-            canvas.before:
-                Color:
-                    rgba: (1, 0.9, 0.8, 1)  # Warna latar belakang produk
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
-
-            Image:
-                source: "assets/produk/produk3.jpeg"  # Ganti dengan gambar produk asli
-                size_hint_x: None
-                width: "100dp"
-                allow_stretch: True
-
-            BoxLayout:
-                orientation: 'vertical'
-                padding: [10, 0]
-
-                Label:
-                    text: "Benih Padi Inpari"
-                    font_size: "18sp"
-                    color: (0, 0, 0, 1)  # Warna teks hitam
-
-                Label:
-                    text: "Rp. 50.000"
-                    font_size: "16sp"
-                    color: (0, 0, 0, 1)
-
-            BoxLayout:
-                orientation: 'horizontal'
-                size_hint_x: None
-                width: "100dp"
-
-                Button:
-                    text: "-"
-                    on_press: root.decrement_item()
-                    size_hint: None, None
-                    size: "40dp", "40dp"
-
-                Label:
-                    id: item_count
-                    text: "1"
-                    color: (0, 0, 0, 1)
-                    font_size: "18sp"
-                    size_hint_x: None
-                    width: "40dp"
-                    text_size: self.size
-                    halign: "center"
-                    valign: "middle"
-
-                Button:
-                    text: "+"
-                    on_press: root.increment_item()
-                    size_hint: None, None
-                    size: "40dp", "40dp"
-
-        # Tombol Checkout
-        Button:
-            text: "CheckOut"
-            size_hint_y: None
-            height: "60dp"
-            background_color: (1, 0.8, 0.2, 1)  # Warna kuning untuk tombol
-            color: (0, 0, 0, 1)  # Warna teks hitam
-            font_size: "18sp"
-            on_press: root.checkout()
+            Button:
+                text: "Checkout"
+                on_press: root.checkout()
+                size_hint_x: 0.7
+                background_normal: ''  
+                background_color: 0, 0.5, 0.8, 1  
 
         # Bottom NavBar
         BoxLayout:
             size_hint_y: None
             height: "60dp"
-            padding: [5, 10]  # Menghilangkan padding agar tombol memenuhi lebar layar
-            spacing: 0  # Menghilangkan jarak antar tombol
+            padding: [5, 10]
+            spacing: 0
             canvas.before:
                 Color:
                     rgba: (1, 0.8, 0.2, 1)  # Warna kuning
@@ -198,4 +108,4 @@
             ImageButton:
                 source: 'assets/profile.png'  # Ikon Profile
                 on_press: root.go_to_profile()
-                size_hint_x: 1 
+                size_hint_x: 1

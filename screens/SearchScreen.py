@@ -9,9 +9,6 @@ from kivy.uix.image import Image
 from kivy.uix.image import AsyncImage
 
 
-# Muat file KV untuk SearchScreen
-Builder.load_file("kv_files/search.kv")
-
 class SearchScreen(Screen):
     pass
     def go_to_home(self):
