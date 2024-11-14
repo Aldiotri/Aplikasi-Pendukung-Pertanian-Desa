@@ -2,10 +2,13 @@ from kivy.uix.screenmanager import Screen
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivy.uix.button import Button
+from kivy.uix.textinput import TextInput
 from kivy.uix.image import AsyncImage
 from kivy.uix.popup import Popup
 from firebase_admin import db
 from kivy.graphics import Color, RoundedRectangle
+import random
+from kivy.uix.spinner import Spinner
 
 class CartScreen(Screen):
     def __init__(self, **kwargs):
@@ -96,22 +99,55 @@ class CartScreen(Screen):
         item_ref = self.cart_ref.child(item_id)
         item_ref.delete()
 
+    def format_rupiah(self, angka):
+        """Fungsi untuk memformat angka menjadi mata uang Rupiah"""
+        return f"Rp {angka:,}".replace(",", ".")
+    
     def checkout(self):
-        """Menampilkan popup checkout dengan total harga"""
-        total_price = 0
-        cart_items = self.cart_ref.get()
+        """Menampilkan popup checkout dengan total harga dan informasi tambahan untuk checkout"""
+        total_harga = 0
+        cart_items = self.cart_ref.get()  # Mengambil data barang dari keranjang
 
         if cart_items:
             for item_data in cart_items.values():
-                total_price += item_data['price'] * item_data['quantity']
+                total_harga += item_data['price'] * item_data['quantity']
 
-        layout = BoxLayout(orientation='vertical', padding=10, spacing=10)
-        layout.add_widget(Label(text=f"Total Harga: Rp {total_price}", font_size="18sp"))
+        # Menghasilkan ongkos kirim acak antara Rp.15.000 dan Rp.30.000
+        ongkos_kirim = random.randint(15000, 30000)
+        total_pembayaran = total_harga + ongkos_kirim
 
-        checkout_button = Button(text="Lanjutkan ke Pembayaran", size_hint=(1, 0.2))
-        layout.add_widget(checkout_button)
+        layout = BoxLayout(orientation='vertical', padding=20, spacing=15)
 
-        popup = Popup(title="Checkout", content=layout, size_hint=(0.8, 0.8))
+        # Menampilkan total harga produk dengan format Rupiah
+        layout.add_widget(Label(text=f"Total Harga Produk: {self.format_rupiah(total_harga)}", font_size="18sp"))
+
+        # Menampilkan kolom untuk alamat pengiriman
+        layout.add_widget(Label(text="Alamat Pengiriman:", font_size="16sp"))
+        alamat_pengiriman = TextInput(hint_text="Masukkan alamat pengiriman", multiline=False, font_size="16sp")
+        layout.add_widget(alamat_pengiriman)
+
+        # Menampilkan ongkos kirim dengan format Rupiah
+        layout.add_widget(Label(text=f"Ongkos Kirim: {self.format_rupiah(ongkos_kirim)}", font_size="16sp"))
+
+        # Pilihan metode pembayaran
+        layout.add_widget(Label(text="Metode Pembayaran:", font_size="16sp"))
+        metode_pembayaran = Spinner(
+            text="Pilih metode pembayaran",
+            values=["COD", "Transfer Bank", "Alfamart/Indomart"],
+            size_hint=(1, None),
+            height="40dp",
+            font_size="16sp",
+        )
+        layout.add_widget(metode_pembayaran)
+
+        # Menampilkan total pembayaran dengan format Rupiah
+        layout.add_widget(Label(text=f"Total Pembayaran: {self.format_rupiah(total_pembayaran)}", font_size="18sp"))
+
+        tombol_checkout = Button(text="Checkout", size_hint=(1, 0.8), font_size="18sp")
+        layout.add_widget(tombol_checkout)
+
+        # Menampilkan popup dengan ukuran ramah Android
+        popup = Popup(title="Checkout", content=layout, size_hint=(0.9, 0.9), auto_dismiss=True)
         popup.open()
 
     def refresh_cart(self):

@@ -4,7 +4,7 @@
         orientation: 'vertical'
         canvas.before:
             Color:
-                rgba: 1, 1, 1, 1  # Warna latar belakang putih
+                rgba: 1, 1, 1, 1
             Rectangle:
                 pos: self.pos
                 size: self.size
@@ -15,7 +15,7 @@
             padding: [10, 10, 10, 10]
             canvas.before:
                 Color:
-                    rgba: (1, 0.8, 0.2, 1)  # Warna kuning
+                    rgba: (1, 0.8, 0.2, 1)
                 RoundedRectangle:
                     pos: self.pos
                     size: self.size
@@ -23,49 +23,51 @@
 
             Label:
                 text: "Notifikasi"
-                color: (0, 0, 0, 1)  # Warna teks hitam
+                color: (0, 0, 0, 1)
                 font_size: "24sp"
                 bold: True
 
-        Label:
-            text: 'Pesanan dan promo terbaru akan muncul disini...'
-            font_size: 16
-            color: (0.4, 0.4, 0.4, 1)
+        ScrollView:
+            BoxLayout:
+                orientation: 'vertical'
+                padding: 10
+                spacing: 10
+                id: notification_list
 
         # Bottom NavBar
         BoxLayout:
             size_hint_y: None
             height: "60dp"
-            padding: [5, 10]  # Menghilangkan padding agar tombol memenuhi lebar layar
-            spacing: 0  # Menghilangkan jarak antar tombol
+            padding: [5, 10]
+            spacing: 0
             canvas.before:
                 Color:
-                    rgba: (1, 0.8, 0.2, 1)  # Warna kuning
+                    rgba: (1, 0.8, 0.2, 1)
                 RoundedRectangle:
                     pos: self.pos
                     size: self.size
                     radius: [50, 50, 0, 0]
             
             ImageButton:
-                source: 'assets/home.png'  # Ikon Home
+                source: 'assets/home.png'
                 on_press: root.go_to_home()
                 size_hint_x: 1 
 
             ImageButton:
-                source: 'assets/search.png'  # Ikon Search
+                source: 'assets/search.png'
                 on_press: root.go_to_search()
                 size_hint_x: 1 
 
             ImageButton:
-                source: 'assets/cart.png'  # Ikon Cart
+                source: 'assets/cart.png'
                 on_press: root.go_to_cart()
                 size_hint_x: 1 
 
             ImageButton:
-                source: 'assets/notification.png'  # Ikon Notification
+                source: 'assets/notification.png'
                 size_hint_x: 1 
 
             ImageButton:
-                source: 'assets/profile.png'  # Ikon Profile
+                source: 'assets/profile.png'
                 on_press: root.go_to_profile()
                 size_hint_x: 1 
