@@ -29,12 +29,21 @@
 
         BoxLayout:
             orientation: 'vertical'
+            padding: [10, 10]  # Padding sekitar komponen, bisa disesuaikan
+            spacing: 10  # Jarak antar komponen
+
             TextInput:
                 id: search_input
                 hint_text: "Cari produk..."
+                size_hint_y: None  # Menentukan agar ukuran vertikal bisa dikontrol
+                height: "40dp"  # Tentukan tinggi TextInput agar tidak kebesaran
+
             Button:
                 text: "Cari"
+                size_hint_y: None  # Menentukan agar ukuran vertikal bisa dikontrol
+                height: "40dp"  # Tentukan tinggi Button agar tidak kebesaran
                 on_release: root.search_products(search_input.text)  # Panggil fungsi search_products dengan teks dari input
+
             ScrollView:
                 GridLayout:
                     id: product_grid
