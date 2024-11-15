@@ -27,41 +27,22 @@
                 bold: True
                 color: (0, 0, 0, 1)
 
-        # Grid untuk Produk
-        ScrollView:
-            do_scroll_x: False  # Hanya scroll vertical
-            BoxLayout:
-                orientation: 'vertical'
-                size_hint_y: None
-                height: self.minimum_height 
-
-                # Search Input dan Button
-                TextInput:
-                    id: search_input
-                    hint_text: "Cari produk atau toko..."
-                    size_hint_y: None
-                    height: "40dp"
-                    background_normal: ''
-                    background_color: 1, 1, 1, 1
-                    multiline: False
-                    on_text_validate: root.search_products(search_input.text)
-
-                Button:
-                    text: "Cari"
-                    size_hint_y: None
-                    height: "40dp"
-                    on_release: root.search_products(search_input.text)  # Kirimkan text input ke fungsi
-
+        BoxLayout:
+            orientation: 'vertical'
+            TextInput:
+                id: search_input
+                hint_text: "Cari produk..."
+            Button:
+                text: "Cari"
+                on_release: root.search_products(search_input.text)  # Panggil fungsi search_products dengan teks dari input
+            ScrollView:
                 GridLayout:
                     id: product_grid
-                    cols: 2
-                    row_default_height: "250dp"
-                    row_force_default: True
-                    spacing: "10dp"
-                    padding: [10, 10]
+                    cols: 1
+                    size_hint_y: None
+                    height: self.minimum_height
 
               
-
         # Bottom NavBar
         BoxLayout:
             size_hint_y: None
