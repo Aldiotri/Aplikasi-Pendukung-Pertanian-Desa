@@ -63,7 +63,7 @@
             spacing: '20dp'
 
             Button:
-                text: "Pesan saya"
+                text: "Pesanan saya"
                 color: 0, 0, 0, 1
                 size_hint_y: None
                 height: '30dp'
@@ -75,6 +75,7 @@
                         pos: self.pos
                         size: self.size
                         radius: [20, 20, 20, 20]  # Rounded corners
+                on_release: root.go_to_pesanan_saya()
 
             Button:
                 text: "Mulai jual"

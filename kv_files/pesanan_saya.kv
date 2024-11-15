@@ -1,0 +1,107 @@
+#:kivy 2.0.0
+<PesananSayaScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        # Header
+        BoxLayout:
+            size_hint_y: None
+            height: "56dp"
+            padding: [10, 10, 10, 10]
+            canvas.before:
+                Color:
+                    rgba: (1, 0.8, 0.2, 1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            
+            Button:
+                text: "<"
+                size_hint_x: 1
+                on_press: root.manager.current = 'profile'
+
+            Label:
+                text: "Pesanan Saya"
+                color: (0, 0, 0, 1)
+                font_size: "20sp"
+                bold: True
+                size_hint_x: 8
+
+        # Tab status pesanan
+        
+        TabbedPanel:
+            do_default_tab: False
+
+            TabbedPanelItem:
+                text: "Belum Dibayar"
+                BoxLayout:
+                    id: unpaid_box
+                    orientation: "vertical"
+                    padding: 10
+
+            TabbedPanelItem:
+                text: "Dikemas"
+                BoxLayout:
+                    id: packed_box
+                    orientation: "vertical"
+                    padding: 10
+
+            TabbedPanelItem:
+                text: "Dikirim"
+                BoxLayout:
+                    id: shipped_box
+                    orientation: "vertical"
+                    padding: 10
+
+            TabbedPanelItem:
+                text: "Beri Penilaian"
+                BoxLayout:
+                    id: review_box
+                    orientation: "vertical"
+                    padding: 10
+
+<CustomOrderBox@BoxLayout>:
+    orientation: 'vertical'
+    padding: [5, 5, 5, 5]
+    canvas.before:
+        Color:
+            rgba: (0.9, 0.9, 0.9, 1)
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [10]
+
+    Label:
+        text: root.product_name
+        font_size: "16sp"
+        color: (0, 0, 0, 1)
+        bold: True
+
+    Label:
+        text: "Harga: Rp {}".format(root.price)
+        font_size: "14sp"
+        color: (0.2, 0.2, 0.2, 1)
+
+    Label:
+        text: "Jumlah: {}".format(root.quantity)
+        font_size: "14sp"
+        color: (0.2, 0.2, 0.2, 1)
+
+    Label:
+        text: "Status: {}".format(root.status)
+        font_size: "14sp"
+        color: (0.2, 0.2, 0.2, 1)
+
+    Button:
+        text: "Konfirmasi Penerimaan"
+        size_hint_y: None
+        height: "40dp"
+        on_release: root.confirm_receipt()
+        opacity: 1 if root.status == 'Sampai Tujuan' else 0
+        disabled: root.status != 'Sampai Tujuan'

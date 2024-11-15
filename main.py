@@ -18,6 +18,7 @@ from screens.AboutUsScreen import AboutUsScreen
 from screens.IntroScreen import IntroScreen
 from screens.VerificationScreen import VerificationScreen
 from screens.TokosayaScreen import TokosayaScreen
+from screens.PesananSayaScreen import PesananSayaScreen
 from views import ProductList, AddProduct, EditProduct
 from kivy_garden.mapview import MapView
 from firebase_admin import credentials, db
@@ -40,7 +41,7 @@ Builder.load_file("kv_files/profile.kv")
 Builder.load_file("kv_files/aboutus.kv")
 Builder.load_file("kv_files/toko.kv")
 Builder.load_file("kv_files/verification.kv")
-
+Builder.load_file('kv_files/pesanan_saya.kv')
 
 class MainApp(App):
     def build(self):
@@ -62,6 +63,7 @@ class MainApp(App):
         sm.add_widget(ProductList(name='product_list'))
         sm.add_widget(AddProduct(name='add_product'))
         sm.add_widget(EditProduct(name='edit_product'))
+        sm.add_widget(PesananSayaScreen(name='pesanan_saya'))
         
         return sm
     

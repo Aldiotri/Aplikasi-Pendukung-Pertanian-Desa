@@ -69,3 +69,6 @@ class ProfileScreen(Screen):
         
     def go_to_toko(self):
         self.manager.current = 'toko'
+        
+    def go_to_pesanan_saya(self):
+        self.manager.current = 'pesanan_saya'
