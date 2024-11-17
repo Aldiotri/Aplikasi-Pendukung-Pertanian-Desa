@@ -10,6 +10,7 @@ from kivy.graphics import Color, RoundedRectangle
 import random
 from kivy.uix.spinner import Spinner
 from kivy.clock import Clock
+from datetime import datetime
 
 class CartScreen(Screen):
     def __init__(self, **kwargs):
@@ -165,17 +166,38 @@ class CartScreen(Screen):
         layout.add_widget(Label(text=f"Total Pembayaran: {self.format_rupiah(total_pembayaran)}", font_size="18sp"))
 
         tombol_checkout = Button(text="Buat Pesanan", size_hint=(1, 0.8), font_size="18sp")
+        tombol_checkout.bind(on_press=lambda x: self.create_order(cart_items, alamat_pengiriman.text, ongkos_kirim, total_pembayaran, metode_pembayaran.text))
         layout.add_widget(tombol_checkout)
 
         # Menampilkan popup dengan ukuran ramah Android
         popup = Popup(title="Checkout", content=layout, size_hint=(0.9, 0.9), auto_dismiss=True)
         popup.open()
 
-    # def refresh_cart(self):
-    #     """Menyegarkan tampilan keranjang"""
-    #     self.load_cart()
+    def create_order(self, cart_items, alamat_pengiriman, ongkos_kirim, total_pembayaran, metode_pembayaran):
+        """Fungsi untuk membuat pesanan baru dan menyimpan ke Firebase"""
+        order_ref = db.reference('orders')
+        order_data = {
+            'items': cart_items,
+            'shipping_cost': ongkos_kirim,
+            'total_payment': total_pembayaran,
+            'shipping_address': alamat_pengiriman,
+            'payment_method': metode_pembayaran,
+            'timestamp': datetime.now().isoformat(),
+            'status': 'Dalam Proses'
+        }
+        order_ref.push(order_data)
 
-    # Navigasi ke layar lain
+        # Tambah notifikasi
+        notification_ref = db.reference('/notifications')
+        notification_ref.push({
+            'message': f"Pesanan berhasil dibuat dengan total pembayaran Rp {total_pembayaran:,}".replace(",", "."),
+            'timestamp': datetime.now().isoformat()
+        })
+
+        # Tampilkan popup sukses
+        success_popup = Popup(title="Pesanan Berhasil", content=Label(text="Pesanan Anda berhasil dibuat!"), size_hint=(0.7, 0.4))
+        success_popup.open()
+
     def go_to_search(self):
         self.manager.current = 'search'
 
